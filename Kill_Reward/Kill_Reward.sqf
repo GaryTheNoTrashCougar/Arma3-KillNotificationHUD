@@ -1,8 +1,8 @@
 player addEventHandler ["Handlescore", {false}];
 
-execVM "Kill_Reward\Kill_Type.sqf";
+sleep 0.5;
 
-killMessage = {
+KillMsg = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -27,7 +27,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-headshotKillMessage = {
+HSKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -52,7 +52,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-LRheadshotKillMessage = {
+LRHSKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -77,7 +77,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-CQBheadshotKillMessage = {
+CQBHSKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -102,7 +102,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-longRangeMessage = {
+LRKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -127,7 +127,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-CQBMessage = {
+CQBKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -152,135 +152,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-addMissionEventHandler ["EntityKilled", 
-{
-	params ["_killed", "_killer"];
-	
-	_headDamage = _killed getHitPointDamage "HitHead";
-	_distance = _killer distance _killed;
-	_minDistance = 100;
-	_cqbDistance = 2;
-	
-	if (isNull _instigator)
-	
-	then
-	{
-	
-		_instigator = _killer
-		
-	};
-	
-	if (_killed isKindOf "CAManBase" && {((side group _killed) != playerSide)})
-	
-	then
-	{
-	
-		if (isPlayer _killer && ({_headDamage >= 1;}))
-		
-		then
-		{
-	
-			if (_distance >= _minDistance && ({_headDamage >= 1;}))
-	
-			then
-			{
-		
-				player addPlayerScores [1, 0, 0, 0, 0];
-				player addRating 100;
-
-				[[killType, _ratingScore]] call LRheadshotKillMessage;
-	
-			}
-			else
-			{
-	
-				if (_distance <= _cqbDistance && ({_headDamage >= 1;}))
-	
-				then
-				{
-		
-					player addPlayerScores [1, 0, 0, 0, 0];
-					player addRating 75;
-
-					[[killType, _ratingScore]] call CQBheadshotKillMessage;
-	
-				}
-				else
-				{
-				
-					if (_distance > _cqbDistance && ({_headDamage >= 1;}))
-					
-					then
-					{
-	
-						player addPlayerScores [1, 0, 0, 0, 0];
-						player addRating 50;
-
-						[[killType, _ratingScore]] call headshotKillMessage;
-					
-					};
-					
-				};
-				
-			};
-		
-		};
-		
-		if (isPlayer _killer && ({_headDamage < 1;}))
-					
-		then
-		{
-					
-			if (_distance >= _minDistance && ({_headDamage < 1;}))
-	
-			then
-			{
-	
-				player addPlayerScores [1, 0, 0, 0, 0];
-				player addRating 50;
-
-				[["LONG RANGE KILL ", _ratingScore]] call longRangeMessage;
-		
-			}
-			else
-			{
-	
-				if (_distance <= _cqbDistance && ({_headDamage < 1;}))
-	
-				then
-				{
-
-					player addPlayerScores [1, 0, 0, 0, 0];
-					player addRating 25;
-
-					[["POINT BLANK KILL ", _ratingScore]] call CQBMessage;
-		
-				}
-				else
-				{
-						
-					if (_distance > _cqbDistance && ({_headDamage < 1;}))
-				
-					then
-					{
-	
-						player addPlayerScores [1, 0, 0, 0, 0];
-
-						[["ENEMY KILLED ", _ratingScore]] call killMessage;
-						
-					};
-					
-				};
-
-			};
-
-		};
-
-	};
-
-}];
-
-friendlyKillMessage = {
+FriendlyKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -305,38 +177,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-addMissionEventHandler ["EntityKilled", 
-{
-	params ["_killed", "_killer"];	
-	if (isNull _instigator) then {_instigator = _killer}; // player driven vehicle road kill
-	
-	if (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)})
-	
-	then
-	{
-		if (!isPlayer _killed)
-		
-		then
-		{
-		
-			if (isPlayer _killer)
-			
-			then
-			{
-
-				player addPlayerScores [0, 0, 0, 0, 0];
-
-				[["FRIENDLY KILLED ", _ratingScore]] call friendlyKillMessage;
-
-			};
-
-		};
-
-	};
-
-}];
-
-suicideMessage = {
+Suicide = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -361,22 +202,159 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-sleep 0.5;
+if (hasInterface)
 
-addMissionEventHandler ["EntityKilled", 
+then
 {
-	params ["_killed", "_killer"];	
-	if (isNull _instigator) then {_instigator = _killer}; // player driven vehicle road kill
+	execVM "Kill_Reward\Kill_Type.sqf";
 	
-	if (_killed isKindOf "CAManBase" && {(isPlayer _killed)} && {(isPlayer _killer)})
-	
-	then
+	addMissionEventHandler ["EntityKilled", 
 	{
+		params ["_killed", "_killer"];
+		
+		_headDamage = _killed getHitPointDamage "HitHead";
+		_distance = _killer distance _killed;
+		_minDistance = 100;
+		_cqbDistance = 2;
+		
+		if (isNull _instigator)
+		
+		then
+		{
+		
+			_instigator = _killer
+		
+		};
+		
+		if (isPlayer _killer)
+		
+		then
+		{
+			
+			if (_killed isKindOf "CAManBase" && {((side group _killed) != playerSide)})
+			
+			then
+			{
+			
+				if (_distance >= _minDistance && ({_headDamage >= 1;}))
+				
+				then
+				{
+					
+					player addPlayerScores [1, 0, 0, 0, 0];
+					player addRating 100;
 
-		player addPlayerScores [0, 0, 0, 0, 0];
+					[[killType, _ratingScore]] call LRHSKill;
+					
+				}
+				else
+				{
+					
+					if (_distance <= _cqbDistance && ({_headDamage >= 1;}))
+					
+					then
+					{
+						
+						player addPlayerScores [1, 0, 0, 0, 0];
+						player addRating 75;
 
-		[["SUICIDE ", _ratingScore]] call suicideMessage;
+						[[killType, _ratingScore]] call CQBHSKill;
+						
+					}
+					else
+					{
+					
+						if (_distance > _cqbDistance && ({_headDamage >= 1;}))
+						
+						then
+						{
+						
+							player addPlayerScores [1, 0, 0, 0, 0];
+							player addRating 50;
 
-	};
-
-}];
+							[[killType, _ratingScore]] call HSKill;
+							
+						};
+						
+					};
+					
+					if (_distance >= _minDistance && ({_headDamage < 1;}))
+					
+					then
+					{
+					
+						player addPlayerScores [1, 0, 0, 0, 0];
+						player addRating 50;
+						
+						[["LONG RANGE KILL ", _ratingScore]] call LRKill;
+						
+					}
+					else
+					{
+					
+						if (_distance <= _cqbDistance && ({_headDamage < 1;}))
+						
+						then
+						{
+						
+							player addPlayerScores [1, 0, 0, 0, 0];
+							player addRating 25;
+							
+							[["POINT BLANK KILL ", _ratingScore]] call CQBKill;
+							
+						}
+						else
+						{
+						
+							if (_distance > _cqbDistance && ({_headDamage < 1;}))
+							
+							then
+							{
+							
+								player addPlayerScores [1, 0, 0, 0, 0];
+								
+								[["ENEMY KILLED ", _ratingScore]] call KillMsg;
+								
+							};
+							
+						};
+						
+					};
+					
+				};
+				
+			};
+			
+			if (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)})
+			
+			then
+			{
+				if (_killer != _killed)
+				
+				then
+				{
+				
+					player addPlayerScores [0, 0, 0, 0, 0];
+					
+					[["FRIENDLY KILLED ", _ratingScore]] call FriendlyKill;
+					
+				};
+				
+				if (_killed == _killer)
+				
+				then
+				{
+				
+					player addPlayerScores [0, 0, 0, 0, 0];
+					
+					[["SUICIDE ", _ratingScore]] call Suicide;
+					
+				};
+				
+			};
+			
+		};
+		
+	}];
+	
+};
