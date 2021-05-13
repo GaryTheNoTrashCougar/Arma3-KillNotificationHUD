@@ -202,7 +202,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-if (hasInterface)
+if !(hasInterface)
 
 then
 {
@@ -216,6 +216,15 @@ then
 		_distance = _killer distance _killed;
 		_minDistance = 100;
 		_cqbDistance = 2;
+		
+		LRHS = {[[killType]] call LRHSKill;};
+		CQBHS = {[[killType]] call CQBHSKill;};
+		HS = {[[killType]] call HSKill;};
+		LR = {[["LONG RANGE KILL "]] call LRKill;};
+		CQB = {[["POINT BLANK KILL "]] call CQBKill;};
+		EK = {[["ENEMY KILLED "]] call KillMsg;};
+		FK = {[["FRIENDLY KILLED "]] call FriendlyKill;};
+		S = {[["SUICIDE "]] call Suicide;};
 		
 		if (isNull _instigator)
 		
@@ -231,7 +240,7 @@ then
 		then
 		{
 			
-			if (_killed isKindOf "CAManBase" && {((side group _killed) != playerSide)})
+			if (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)})
 			
 			then
 			{
@@ -241,10 +250,9 @@ then
 				then
 				{
 					
-					player addPlayerScores [1, 0, 0, 0, 0];
-					player addRating 100;
-
-					[[killType, _ratingScore]] call LRHSKill;
+					_killer addPlayerScores [1, 0, 0, 0, 0];
+					_killer addRating 100;
+					_killer spawn LRHS;
 					
 				}
 				else
@@ -255,10 +263,9 @@ then
 					then
 					{
 						
-						player addPlayerScores [1, 0, 0, 0, 0];
-						player addRating 75;
-
-						[[killType, _ratingScore]] call CQBHSKill;
+						_killer addPlayerScores [1, 0, 0, 0, 0];
+						_killer addRating 75;
+						_killer spawn CQBHS;
 						
 					}
 					else
@@ -269,10 +276,9 @@ then
 						then
 						{
 						
-							player addPlayerScores [1, 0, 0, 0, 0];
-							player addRating 50;
-
-							[[killType, _ratingScore]] call HSKill;
+							_killer addPlayerScores [1, 0, 0, 0, 0];
+							_killer addRating 50;
+							_killer spawn HS;
 							
 						};
 						
@@ -283,10 +289,9 @@ then
 					then
 					{
 					
-						player addPlayerScores [1, 0, 0, 0, 0];
-						player addRating 50;
-						
-						[["LONG RANGE KILL ", _ratingScore]] call LRKill;
+						_killer addPlayerScores [1, 0, 0, 0, 0];
+						_killer addRating 50;
+						_killer spawn LR;
 						
 					}
 					else
@@ -297,23 +302,21 @@ then
 						then
 						{
 						
-							player addPlayerScores [1, 0, 0, 0, 0];
-							player addRating 25;
-							
-							[["POINT BLANK KILL ", _ratingScore]] call CQBKill;
+							_killer addPlayerScores [1, 0, 0, 0, 0];
+							_killer addRating 25;
+							_killer spawn CQB;
 							
 						}
 						else
 						{
 						
-							if (_distance > _cqbDistance && ({_headDamage < 1;}))
+							if ((_distance > _cqbDistance && {_distance < _minDistance}) && ({_headDamage < 1;}))
 							
 							then
 							{
 							
-								player addPlayerScores [1, 0, 0, 0, 0];
-								
-								[["ENEMY KILLED ", _ratingScore]] call KillMsg;
+								_killer addPlayerScores [1, 0, 0, 0, 0];
+								_killer spawn EK;
 								
 							};
 							
@@ -334,9 +337,8 @@ then
 				then
 				{
 				
-					player addPlayerScores [0, 0, 0, 0, 0];
-					
-					[["FRIENDLY KILLED ", _ratingScore]] call FriendlyKill;
+					_killer addPlayerScores [0, 0, 0, 0, 0];
+					_killer spawn FK;
 					
 				};
 				
@@ -345,9 +347,8 @@ then
 				then
 				{
 				
-					player addPlayerScores [0, 0, 0, 0, 0];
-					
-					[["SUICIDE ", _ratingScore]] call Suicide;
+					_killer addPlayerScores [0, 0, 0, 0, 0];
+					_killer spawn S;
 					
 				};
 				
