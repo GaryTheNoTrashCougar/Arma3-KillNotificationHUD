@@ -202,7 +202,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-if !(hasInterface)
+if (hasInterface)
 
 then
 {
