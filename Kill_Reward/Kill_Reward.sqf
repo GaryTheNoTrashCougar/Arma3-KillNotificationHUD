@@ -202,123 +202,119 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-if (hasInterface)
+if(!local player) exitWith {};
 
-then
+execVM "Kill_Reward\Kill_Type.sqf";
+
+addMissionEventHandler ["EntityKilled", 
 {
-	execVM "Kill_Reward\Kill_Type.sqf";
+	params ["_killed", "_killer"];
+		
+	_headDamage = _killed getHitPointDamage "HitHead";
+	_distance = _killer distance _killed;
+	_minDistance = 100;
+	_cqbDistance = 2;
 	
-	addMissionEventHandler ["EntityKilled", 
+	LRHS = {[[killType]] call LRHSKill;};
+	CQBHS = {[[killType]] call CQBHSKill;};
+	HS = {[[killType]] call HSKill;};
+	LR = {[["LONG RANGE KILL "]] call LRKill;};
+	CQB = {[["POINT BLANK KILL "]] call CQBKill;};
+	EK = {[["ENEMY KILLED "]] call KillMsg;};
+	FK = {[["FRIENDLY KILLED "]] call FriendlyKill;};
+	S = {[["SUICIDE "]] call Suicide;};
+	
+	if (isNull _instigator)
+	
+	then
 	{
-		params ["_killed", "_killer"];
+	
+		_instigator = _killer
+	
+	};
+	
+	if (isPlayer _killer)
+	
+	then
+	{
 		
-		_headDamage = _killed getHitPointDamage "HitHead";
-		_distance = _killer distance _killed;
-		_minDistance = 100;
-		_cqbDistance = 2;
-		
-		LRHS = {[[killType]] call LRHSKill;};
-		CQBHS = {[[killType]] call CQBHSKill;};
-		HS = {[[killType]] call HSKill;};
-		LR = {[["LONG RANGE KILL "]] call LRKill;};
-		CQB = {[["POINT BLANK KILL "]] call CQBKill;};
-		EK = {[["ENEMY KILLED "]] call KillMsg;};
-		FK = {[["FRIENDLY KILLED "]] call FriendlyKill;};
-		S = {[["SUICIDE "]] call Suicide;};
-		
-		if (isNull _instigator)
+		if (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)})
 		
 		then
 		{
 		
-			_instigator = _killer
-		
-		};
-		
-		if (isPlayer _killer)
-		
-		then
-		{
-			
-			if (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)})
+			if (_distance >= _minDistance && ({_headDamage >= 1;}))
 			
 			then
 			{
-			
-				if (_distance >= _minDistance && ({_headDamage >= 1;}))
+				
+				_killer addPlayerScores [1, 0, 0, 0, 0];
+				_killer addRating 100;
+				_killer spawn LRHS;
+				
+			}
+			else
+			{
+				
+				if (_distance <= _cqbDistance && ({_headDamage >= 1;}))
 				
 				then
 				{
 					
 					_killer addPlayerScores [1, 0, 0, 0, 0];
-					_killer addRating 100;
-					_killer spawn LRHS;
+					_killer addRating 75;
+					_killer spawn CQBHS;
 					
 				}
 				else
 				{
-					
-					if (_distance <= _cqbDistance && ({_headDamage >= 1;}))
-					
-					then
-					{
-						
-						_killer addPlayerScores [1, 0, 0, 0, 0];
-						_killer addRating 75;
-						_killer spawn CQBHS;
-						
-					}
-					else
-					{
-					
-						if (_distance > _cqbDistance && ({_headDamage >= 1;}))
-						
-						then
-						{
-						
-							_killer addPlayerScores [1, 0, 0, 0, 0];
-							_killer addRating 50;
-							_killer spawn HS;
-							
-						};
-						
-					};
-					
-					if (_distance >= _minDistance && ({_headDamage < 1;}))
+				
+					if (_distance > _cqbDistance && ({_headDamage >= 1;}))
 					
 					then
 					{
 					
 						_killer addPlayerScores [1, 0, 0, 0, 0];
 						_killer addRating 50;
-						_killer spawn LR;
+						_killer spawn HS;
+						
+					};
+					
+				};
+				
+				if (_distance >= _minDistance && ({_headDamage < 1;}))
+				
+				then
+				{
+				
+					_killer addPlayerScores [1, 0, 0, 0, 0];
+					_killer addRating 50;
+					_killer spawn LR;
+					
+				}
+				else
+				{
+				
+					if (_distance <= _cqbDistance && ({_headDamage < 1;}))
+					
+					then
+					{
+					
+						_killer addPlayerScores [1, 0, 0, 0, 0];
+						_killer addRating 25;
+						_killer spawn CQB;
 						
 					}
 					else
 					{
 					
-						if (_distance <= _cqbDistance && ({_headDamage < 1;}))
+						if ((_distance > _cqbDistance && {_distance < _minDistance}) && ({_headDamage < 1;}))
 						
 						then
 						{
 						
 							_killer addPlayerScores [1, 0, 0, 0, 0];
-							_killer addRating 25;
-							_killer spawn CQB;
-							
-						}
-						else
-						{
-						
-							if ((_distance > _cqbDistance && {_distance < _minDistance}) && ({_headDamage < 1;}))
-							
-							then
-							{
-							
-								_killer addPlayerScores [1, 0, 0, 0, 0];
-								_killer spawn EK;
-								
-							};
+							_killer spawn EK;
 							
 						};
 						
@@ -328,34 +324,34 @@ then
 				
 			};
 			
-			if (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)})
+		};
+		
+		if (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)})
+		
+		then
+		{
+			if (_killer != _killed)
 			
 			then
 			{
-				if (_killer != _killed)
+			
+				_killer addPlayerScores [0, 0, 0, 0, 0];
+				_killer spawn FK;
 				
-				then
-				{
-				
-					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer spawn FK;
-					
-				};
-				
-				if (_killed == _killer)
-				
-				then
-				{
-				
-					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer spawn S;
-					
-				};
+			};
+			
+			if (_killed == _killer)
+			
+			then
+			{
+			
+				_killer addPlayerScores [0, 0, 0, 0, 0];
+				_killer spawn S;
 				
 			};
 			
 		};
 		
-	}];
+	};
 	
-};
+}];
