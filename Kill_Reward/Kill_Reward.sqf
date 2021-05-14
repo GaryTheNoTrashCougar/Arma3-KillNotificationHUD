@@ -27,7 +27,7 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-RKill = {
+VKill = {
 _messages = _this;
 _ratingScore = 0;
 _messageContent = "<t align='right' size='1.25'>";
@@ -240,7 +240,7 @@ addMissionEventHandler ["EntityKilled",
 	_minDistance = 100;
 	_cqbDistance = 2;
 	
-	RK = {[["ROAD KILL "]] call RKill;};
+	VK = {[["VEHICLE KILL "]] call VKill;};
 	LRHS = {[[killType]] call LRHSKill;};
 	CQBHS = {[[killType]] call CQBHSKill;};
 	HS = {[[killType]] call HSKill;};
@@ -266,7 +266,7 @@ addMissionEventHandler ["EntityKilled",
 		
 		_killer addPlayerScores [1, 0, 0, 0, 0];
 		_killer addRating 25;
-		_killer spawn RK;
+		_killer spawn VK;
 		
 	};
 	
@@ -275,8 +275,101 @@ addMissionEventHandler ["EntityKilled",
 	then
 	{
 		
-		_killer addPlayerScores [0, 0, 0, 0, 0];
-		_killer spawn FK;
+		if (_killer != _killed)
+		
+		then
+		{
+		
+			_killer addPlayerScores [0, 0, 0, 0, 0];
+			_killer spawn FK;
+			
+		};
+		
+		if (_killed == _killer)
+		
+		then
+		{
+		
+			_killer addPlayerScores [0, 0, 0, 0, 0];
+			_killer spawn S;
+			
+		};
+		
+	};
+	
+	if (vehicle player isKindOf "Air" && (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)}))
+	
+	then
+	{
+		
+		_killer addPlayerScores [1, 0, 0, 0, 0];
+		_killer addRating 25;
+		_killer spawn VK;
+		
+	};
+	
+	if (vehicle player isKindOf "Air" && (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)}))
+	
+	then
+	{
+		
+		if (_killer != _killed)
+		
+		then
+		{
+		
+			_killer addPlayerScores [0, 0, 0, 0, 0];
+			_killer spawn FK;
+			
+		};
+		
+		if (_killed == _killer)
+		
+		then
+		{
+		
+			_killer addPlayerScores [0, 0, 0, 0, 0];
+			_killer spawn S;
+			
+		};
+		
+	};
+	
+	if (vehicle player isKindOf "Ship" && (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)}))
+	
+	then
+	{
+		
+		_killer addPlayerScores [1, 0, 0, 0, 0];
+		_killer addRating 25;
+		_killer spawn VK;
+		
+	};
+	
+	if (vehicle player isKindOf "Ship" && (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)}))
+	
+	then
+	{
+		
+		if (_killer != _killed)
+		
+		then
+		{
+		
+			_killer addPlayerScores [0, 0, 0, 0, 0];
+			_killer spawn FK;
+			
+		};
+		
+		if (_killed == _killer)
+		
+		then
+		{
+		
+			_killer addPlayerScores [0, 0, 0, 0, 0];
+			_killer spawn S;
+			
+		};
 		
 	};
 	
@@ -285,7 +378,7 @@ addMissionEventHandler ["EntityKilled",
 	then
 	{
 		
-		if (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)})
+		if (!(vehicle player isKindOf "LandVehicle") && !(vehicle player isKindOf "Air") && !(vehicle player isKindOf "Ship") && (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)}))
 		
 		then
 		{
