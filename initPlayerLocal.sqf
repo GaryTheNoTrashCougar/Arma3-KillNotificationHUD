@@ -1,1 +1,1 @@
-[] execVM "Kill_Reward\Kill_Reward_init.sqf";
+[] execVM "Kill_Reward\Kill_Reward.sqf";
