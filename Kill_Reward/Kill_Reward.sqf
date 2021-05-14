@@ -27,6 +27,31 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
+RKill = {
+_messages = _this;
+_ratingScore = 0;
+_messageContent = "<t align='right' size='1.25'>";
+{
+	_scoreName = _x select 0;
+	_ratingScore = _ratingScore + 225;
+	_messageContent = _messageContent + format ["<t font='PuristaSemibold'>%1</t>%2<br/>", _scoreName];
+} 
+forEach _messages;
+_messageContent = _messageContent + "</t>";
+if (_ratingScore >= 0) then
+{
+	_messageContent = _messageContent + (format ["<t align='right' color='#ffff00' font='PuristaBold' size='1.4'>+%1</t>", _ratingScore]);
+};
+[
+	parseText _messageContent, 
+	[safezoneX, safezoneY + safeZoneH * 0.55, safezoneW * 0.62, safeZoneH * 0.57], 
+	nil, 
+	1, 
+	0.7,
+	0 
+]
+spawn BIS_fnc_textTiles;};
+
 HSKill = {
 _messages = _this;
 _ratingScore = 0;
@@ -202,19 +227,20 @@ if (_ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-if(!local player) exitWith {};
-
 execVM "Kill_Reward\Kill_Type.sqf";
 
 addMissionEventHandler ["EntityKilled", 
 {
 	params ["_killed", "_killer"];
+	
+	if(!local _killer) exitWith {};
 		
 	_headDamage = _killed getHitPointDamage "HitHead";
 	_distance = _killer distance _killed;
 	_minDistance = 100;
 	_cqbDistance = 2;
 	
+	RK = {[["ROAD KILL "]] call RKill;};
 	LRHS = {[[killType]] call LRHSKill;};
 	CQBHS = {[[killType]] call CQBHSKill;};
 	HS = {[[killType]] call HSKill;};
@@ -228,12 +254,33 @@ addMissionEventHandler ["EntityKilled",
 	
 	then
 	{
-	
+		
 		_instigator = _killer
-	
+		
 	};
 	
-	if (player == _killer)
+	if (vehicle player isKindOf "LandVehicle" && (_killed isKindOf "CAManBase" && {!((side group _killed) == playerSide)}))
+	
+	then
+	{
+		
+		_killer addPlayerScores [1, 0, 0, 0, 0];
+		_killer addRating 25;
+		_killer spawn RK;
+		
+	};
+	
+	if (vehicle player isKindOf "LandVehicle" && (_killed isKindOf "CAManBase" && {((side group _killed) == playerSide)}))
+	
+	then
+	{
+		
+		_killer addPlayerScores [0, 0, 0, 0, 0];
+		_killer spawn FK;
+		
+	};
+	
+	if (vehicle player == _killer)
 	
 	then
 	{
