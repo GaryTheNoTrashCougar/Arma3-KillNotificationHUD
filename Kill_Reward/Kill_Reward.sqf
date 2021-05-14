@@ -233,7 +233,7 @@ addMissionEventHandler ["EntityKilled",
 	
 	};
 	
-	if (isPlayer _killer)
+	if (player == _killer)
 	
 	then
 	{
