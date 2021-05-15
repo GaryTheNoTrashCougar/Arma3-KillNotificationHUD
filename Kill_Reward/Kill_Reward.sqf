@@ -1,10 +1,11 @@
 player addEventHandler ["Handlescore", {false}];
-
 player addEventHandler ["HandleRating", {0}];
 
 sleep 0.5;
 
+symbol = "";
 ratingScore = [];
+colour = "";
 
 KillMsg = {
 _messages = _this;
@@ -18,57 +19,7 @@ forEach _messages;
 _messageContent = _messageContent + "</t>";
 if (ratingScore >= 0) then
 {
-	_messageContent = _messageContent + (format ["<t align='right' color='#ffff00' font='PuristaBold' size='1.4'>+%1</t>", ratingScore]);
-};
-[
-	parseText _messageContent, 
-	[safezoneX, safezoneY + safeZoneH * 0.55, safezoneW * 0.62, safeZoneH * 0.57], 
-	nil, 
-	1, 
-	0.7,
-	0 
-]
-spawn BIS_fnc_textTiles;};
-
-FriendlyKill = {
-_messages = _this;
-_ratingScore = 0;
-_messageContent = "<t align='right' size='1.25'>";
-{
-	_scoreName = _x select 0;
-	_ratingScore = _ratingScore + 500;
-	_messageContent = _messageContent + format ["<t font='PuristaSemibold'>%1</t>%2<br/>", toUpper _scoreName];
-} 
-forEach _messages;
-_messageContent = _messageContent + "</t>";
-if (_ratingScore >= 0) then 
-{
-	_messageContent = _messageContent + (format ["<t align='right' color='#ea0000' font='PuristaBold' size='1.4'>-%1</t>", _ratingScore]);
-};
-[
-	parseText _messageContent, 
-	[safezoneX, safezoneY + safeZoneH * 0.55, safezoneW * 0.62, safeZoneH * 0.57], 
-	nil, 
-	1, 
-	0.7,
-	0 
-]
-spawn BIS_fnc_textTiles;};
-
-Suicide = {
-_messages = _this;
-_ratingScore = 0;
-_messageContent = "<t align='right' size='1.25'>";
-{
-	_scoreName = _x select 0;
-	_ratingScore = _ratingScore - 100;
-	_messageContent = _messageContent + format ["<t font='PuristaSemibold'>%1</t>%2<br/>", toUpper _scoreName];
-} 
-forEach _messages;
-_messageContent = _messageContent + "</t>";
-if (_ratingScore >= 0) then
-{
-	_messageContent = _messageContent + (format ["<t align='right' color='#ffff00' font='PuristaBold' size='1.4'>+%1</t>", _ratingScore]);
+	_messageContent = _messageContent + (format ["<t align='right' color='%3' font='PuristaBold' size='1.4'>%1%2</t>", symbol, ratingScore, colour]);
 };
 [
 	parseText _messageContent, 
@@ -95,8 +46,6 @@ addMissionEventHandler ["EntityKilled",
 	_cqbDistance = 2;
 	
 	KM = {[[killType]] call KillMsg;};
-	FK = {[["FRIENDLY KILLED "]] call FriendlyKill;};
-	S = {[["SUICIDE "]] call Suicide;};
 	
 	if (isNull _instigator)
 	
@@ -113,8 +62,10 @@ addMissionEventHandler ["EntityKilled",
 		
 		then
 		{
-			killType = "VEHICLE KILL ";
+			killType = "VEHICLE KILL";
+			symbol = "+";
 			ratingScore = -50;
+			colour = "#ffff00";
 			_killer addPlayerScores [1, 0, 0, 0, 0];
 			_killer addRating 50;
 			_killer spawn KM;
@@ -125,21 +76,28 @@ addMissionEventHandler ["EntityKilled",
 			
 			then
 			{
+				symbol = "-";
+				colour = "#ea0000";
+				
 				if (_killed isNotEqualTo _killer)
 				
 				then
 				{
+					killType = "FRIENDLY KILL";
+					ratingScore = 400;
 					_killer addPlayerScores [0, 0, 0, 0, 0];
 					_killer addRating -500;
-					_killer spawn FK;
+					_killer spawn KM;
 				};
 				
 				if (_killed isEqualTo _killer)
 				
 				then
 				{
+					killType = "SUICIDE";
 					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer spawn S;
+					_killer addRating -100;
+					_killer spawn KM;
 				};
 			};
 		};
@@ -157,6 +115,9 @@ addMissionEventHandler ["EntityKilled",
 			
 			then
 			{
+				symbol = "+";
+				colour = "#ffff00";
+				
 				if (_distance >= _minDistance && ({_headDamage >= 1;}))
 				
 				then
@@ -194,7 +155,7 @@ addMissionEventHandler ["EntityKilled",
 					
 					then
 					{
-						killType = "LONG RANGE KILL ";
+						killType = "LONG RANGE KILL";
 						ratingScore = 50;
 						_killer addPlayerScores [1, 0, 0, 0, 0];
 						_killer addRating 150;
@@ -206,7 +167,7 @@ addMissionEventHandler ["EntityKilled",
 						
 						then
 						{
-							killType = "POINT BLANK KILL ";
+							killType = "POINT BLANK KILL";
 							ratingScore = 25;
 							_killer addPlayerScores [1, 0, 0, 0, 0];
 							_killer addRating 125;
@@ -218,7 +179,7 @@ addMissionEventHandler ["EntityKilled",
 							
 							then
 							{
-								killType = "ENEMY KILLED ";
+								killType = "ENEMY KILLED";
 								_killer addPlayerScores [1, 0, 0, 0, 0];
 								_killer addRating 100;
 								_killer spawn KM;
@@ -233,21 +194,28 @@ addMissionEventHandler ["EntityKilled",
 				
 				then
 				{
+					symbol = "-";
+					colour = "#ea0000";
+					
 					if (_killed isNotEqualTo _killer)
 					
 					then
 					{
+						killType = "FRIENDLY KILL";
+						ratingScore = 400;
 						_killer addPlayerScores [0, 0, 0, 0, 0];
 						_killer addRating -500;
-						_killer spawn FK;
+						_killer spawn KM;
 					};
 					
 					if (_killed isEqualTo _killer)
 					
 					then
 					{
+						killType = "SUICIDE";
 						_killer addPlayerScores [0, 0, 0, 0, 0];
-						_killer spawn S;
+						_killer addRating -100;
+						_killer spawn KM;
 					};
 				};
 			};
