@@ -6,36 +6,29 @@
 			_x addEventHandler ["HitPart",
 			{
 				(_this select 0) params ["_target", "_shooter", "_projectile", "_position", "_velocity", "_selection", "_ammo", "_vector", "_radius", "_surfaceType", "_isDirect"];
-				
 				if (!(vehicle _shooter isKindOf "LandVehicle") && !(vehicle _shooter isKindOf "Air") && !(vehicle _shooter isKindOf "Ship"))
-		
 				then
 				{
 					if (!((side group _target) isEqualTo playerSide) && (_target isKindOf "CAManBase"))
-					
 					then
 					{
 						if (!isPlayer _target)
-						
 						then
 						{
 							if (isPlayer _shooter)
-							
 							then
 							{
 								if (_isDirect == true)
-								
 								then
 								{
-									killType = "HEADSHOT";
+									altKillType = "HEADSHOT";
 								}
 								else
 								{
 									if (_isDirect == false)
-									
 									then
 									{
-										killType = "EXPLOSIVE KILL";
+										altKillType = "EXPLOSIVE KILL";
 									};
 								};
 							};
@@ -43,11 +36,8 @@
 					};
 				};
 			}];
-			
 		_x setVariable ["passedThathitPart",TRUE];
-			
 		} forEach (allUnits select {isNil {_x getVariable "passedThatHitPart"}});
-		
 	sleep 2;
 	};
 };
