@@ -32,7 +32,6 @@ if (ratingScore >= 0) then
 spawn BIS_fnc_textTiles;};
 
 execVM "Kill_Reward\Kill_Type.sqf";
-
 addMissionEventHandler ["EntityKilled", 
 {
 	params ["_killed", "_killer"];
@@ -46,20 +45,17 @@ addMissionEventHandler ["EntityKilled",
 	_cqbDistance = 2;
 	
 	KM = {[[killType]] call KillMsg;};
+	AKM = {[[altKillType]] call KillMsg;};
 	
 	if (isNull _instigator)
-	
 	then
 	{
 		_instigator = _killer
 	};
-	
 	if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
-	
 	then
 	{
 		if !((side group _killed) isEqualTo playerSide)
-		
 		then
 		{
 			killType = "VEHICLE KILL";
@@ -73,14 +69,11 @@ addMissionEventHandler ["EntityKilled",
 		else
 		{
 			if ((side group _killed) isEqualTo playerSide)
-			
 			then
 			{
 				symbol = "-";
 				colour = "#ea0000";
-				
 				if (_killed isNotEqualTo _killer)
-				
 				then
 				{
 					killType = "FRIENDLY KILL";
@@ -89,9 +82,7 @@ addMissionEventHandler ["EntityKilled",
 					_killer addRating -500;
 					_killer spawn KM;
 				};
-				
 				if (_killed isEqualTo _killer)
-				
 				then
 				{
 					killType = "SUICIDE";
@@ -102,87 +93,86 @@ addMissionEventHandler ["EntityKilled",
 			};
 		};
 	};
-	
 	if (vehicle player isEqualTo _killer)
-	
 	then
 	{
 		if ((!(vehicle player isKindOf "LandVehicle") && !(vehicle player isKindOf "Air") && !(vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
-		
 		then
 		{
 			if !((side group _killed) isEqualTo playerSide)
-			
 			then
 			{
 				symbol = "+";
 				colour = "#ffff00";
-				
-				if (_distance >= _minDistance && ({_headDamage >= 1;}))
-				
+				if (_headDamage >= 1)
 				then
 				{
-					ratingScore = 100;
-					_killer addPlayerScores [1, 0, 0, 0, 0];
-					_killer addRating 200;
-					_killer spawn KM;
-				}
-				else
-				{
-					if (_distance <= _cqbDistance && ({_headDamage >= 1;}))
-					
+					if (_distance >= _minDistance)
 					then
 					{
-						ratingScore = 75;
+						ratingScore = 100;
 						_killer addPlayerScores [1, 0, 0, 0, 0];
-						_killer addRating 175;
-						_killer spawn KM;
+						_killer addRating 200;
+						_killer spawn AKM;
 					}
 					else
 					{
-						if (_distance > _cqbDistance && ({_headDamage >= 1;}))
-						
+						if (_distance <= _cqbDistance)
 						then
 						{
+							ratingScore = 75;
+							_killer addPlayerScores [1, 0, 0, 0, 0];
+							_killer addRating 175;
+							_killer spawn AKM;
+						}
+						else
+						{
+							if (_distance > _cqbDistance)
+							then
+							{
+								ratingScore = 50;
+								_killer addPlayerScores [1, 0, 0, 0, 0];
+								_killer addRating 150;
+								_killer spawn AKM;
+							};
+						};
+					};
+				}	
+				else
+				{
+					if (_headDamage < 1)
+					then
+					{
+						if (_distance >= _minDistance)
+						then
+						{
+							killType = "LONG RANGE KILL";
 							ratingScore = 50;
 							_killer addPlayerScores [1, 0, 0, 0, 0];
 							_killer addRating 150;
 							_killer spawn KM;
-						};
-					};
-					
-					if (_distance >= _minDistance && ({_headDamage < 1;}))
-					
-					then
-					{
-						killType = "LONG RANGE KILL";
-						ratingScore = 50;
-						_killer addPlayerScores [1, 0, 0, 0, 0];
-						_killer addRating 150;
-						_killer spawn KM;
-					}
-					else
-					{
-						if (_distance <= _cqbDistance && ({_headDamage < 1;}))
-						
-						then
-						{
-							killType = "POINT BLANK KILL";
-							ratingScore = 25;
-							_killer addPlayerScores [1, 0, 0, 0, 0];
-							_killer addRating 125;
-							_killer spawn KM;
 						}
 						else
 						{
-							if ((_distance > _cqbDistance && {_distance < _minDistance}) && ({_headDamage < 1;}))
-							
+							if (_distance <= _cqbDistance)
 							then
 							{
-								killType = "ENEMY KILLED";
+								killType = "POINT BLANK KILL";
+								ratingScore = 25;
 								_killer addPlayerScores [1, 0, 0, 0, 0];
-								_killer addRating 100;
+								_killer addRating 125;
 								_killer spawn KM;
+							}
+							else
+							{
+								if ((_distance > _cqbDistance && {_distance < _minDistance}))
+								then
+								{
+									killType = "ENEMY KILLED";
+									_killer addPlayerScores [1, 0, 0, 0, 0];
+									_killer addRating 100;
+									_killer spawn KM;
+								};
 							};
 						};
 					};
@@ -191,14 +181,12 @@ addMissionEventHandler ["EntityKilled",
 			else
 			{
 				if ((side group _killed) isEqualTo playerSide)
-				
 				then
 				{
 					symbol = "-";
 					colour = "#ea0000";
 					
 					if (_killed isNotEqualTo _killer)
-					
 					then
 					{
 						killType = "FRIENDLY KILL";
@@ -207,9 +195,7 @@ addMissionEventHandler ["EntityKilled",
 						_killer addRating -500;
 						_killer spawn KM;
 					};
-					
 					if (_killed isEqualTo _killer)
-					
 					then
 					{
 						killType = "SUICIDE";
