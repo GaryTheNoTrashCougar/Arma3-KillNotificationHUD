@@ -18,17 +18,21 @@
 							if (isPlayer _shooter)
 							then
 							{
-								if (_isDirect == true)
+								if ("head" in (_this select 0 select 5))
 								then
 								{
-									altKillType = "HEADSHOT";
-								}
-								else
-								{
-									if (_isDirect == false)
+									if (_isDirect isEqualTo true)
 									then
 									{
-										altKillType = "EXPLOSIVE KILL";
+										altKillType = "HEADSHOT";
+									}
+									else
+									{
+										if (_isDirect isEqualTo false)
+										then
+										{
+											altKillType = "EXPLOSIVE KILL";
+										};
 									};
 								};
 							};
