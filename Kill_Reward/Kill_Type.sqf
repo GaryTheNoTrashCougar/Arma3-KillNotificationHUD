@@ -25,15 +25,12 @@
 									then
 									{
 										altKillType = "HEADSHOT";
-									}
-									else
-									{
-										if (_isDirect isEqualTo false)
-										then
-										{
-											altKillType = "EXPLOSIVE KILL";
-										};
 									};
+								};
+								if (_isDirect isEqualTo false)
+								then
+								{
+									altKillType = "EXPLOSIVE KILL";
 								};
 							};
 						};
