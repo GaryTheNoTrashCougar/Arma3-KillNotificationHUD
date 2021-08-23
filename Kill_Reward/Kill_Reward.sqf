@@ -104,7 +104,7 @@ addMissionEventHandler ["EntityKilled",
 			{
 				symbol = "+";
 				colour = "#ffff00";
-				if (_headDamage >= 1)
+				if (head)
 				then
 				{
 					if (_distance >= _minDistance)
@@ -127,7 +127,7 @@ addMissionEventHandler ["EntityKilled",
 						}
 						else
 						{
-							if (_distance > _cqbDistance)
+							if ((_distance > _cqbDistance && {_distance < _minDistance}))
 							then
 							{
 								ratingScore = 50;
@@ -140,7 +140,7 @@ addMissionEventHandler ["EntityKilled",
 				}	
 				else
 				{
-					if (_headDamage < 1)
+					if !(head)
 					then
 					{
 						if (_distance >= _minDistance)
