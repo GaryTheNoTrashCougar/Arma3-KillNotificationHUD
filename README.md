@@ -12,6 +12,7 @@ Kill Notifications:
 * HEADSHOT
 * LONG RANGE KILL
 * POINT BLANK KILL
+* EXPLOSIVE KILL
 * VEHICLE KILL
 
 To add this to your mission simply copy the files & folders to your Arma 3 mission folder. You may have to copy & paste the contents of `initPlayerLocal.sqf` if you already have this file in your mission.
