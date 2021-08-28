@@ -43,10 +43,8 @@ addMissionEventHandler ["EntityKilled",
 	_minDistance = 100;
 	_cqbDistance = 2;
 	isFriendly = [(side group _killer),(side group _killed)] call BIS_fnc_sideIsFriendly;
-	isEnemy = [(side group _killer),(side group _killed)] call BIS_fnc_sideIsEnemy;
 	
-	KM = {[[killType]] call KillMsg;};
-	AKM = {[[altKillType]] call KillMsg;};
+	kill = {[[killType]] call KillMsg;};
 	
 	if (isNull _instigator)
 	then
@@ -56,7 +54,7 @@ addMissionEventHandler ["EntityKilled",
 	if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
 	then
 	{
-		if (isEnemy)
+		if !(isFriendly)
 		then
 		{
 			killType = "VEHICLE KILL";
@@ -65,7 +63,7 @@ addMissionEventHandler ["EntityKilled",
 			colour = "#ffff00";
 			_killer addPlayerScores [1, 0, 0, 0, 0];
 			_killer addRating 50;
-			_killer spawn KM;
+			_killer spawn kill;
 		}
 		else
 		{
@@ -81,7 +79,7 @@ addMissionEventHandler ["EntityKilled",
 					ratingScore = 400;
 					_killer addPlayerScores [0, 0, 0, 0, 0];
 					_killer addRating -500;
-					_killer spawn KM;
+					_killer spawn kill;
 				};
 				if (_killed isEqualTo _killer)
 				then
@@ -89,7 +87,7 @@ addMissionEventHandler ["EntityKilled",
 					killType = "SUICIDE";
 					_killer addPlayerScores [0, 0, 0, 0, 0];
 					_killer addRating -100;
-					_killer spawn KM;
+					_killer spawn kill;
 				};
 			};
 		};
@@ -100,7 +98,7 @@ addMissionEventHandler ["EntityKilled",
 		if ((!(vehicle player isKindOf "LandVehicle") && !(vehicle player isKindOf "Air") && !(vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
 		then
 		{
-			if (isEnemy)
+			if !(isFriendly)
 			then
 			{
 				symbol = "+";
@@ -111,30 +109,33 @@ addMissionEventHandler ["EntityKilled",
 					if (_distance >= _minDistance)
 					then
 					{
+						killType = "HEADSHOT";
 						ratingScore = 100;
 						_killer addPlayerScores [1, 0, 0, 0, 0];
 						_killer addRating 200;
-						_killer spawn AKM;
+						_killer spawn kill;
 					}
 					else
 					{
 						if (_distance <= _cqbDistance)
 						then
 						{
+							killType = "HEADSHOT";
 							ratingScore = 75;
 							_killer addPlayerScores [1, 0, 0, 0, 0];
 							_killer addRating 175;
-							_killer spawn AKM;
+							_killer spawn kill;
 						}
 						else
 						{
 							if ((_distance > _cqbDistance && {_distance < _minDistance}))
 							then
 							{
+								killType = "HEADSHOT";
 								ratingScore = 50;
 								_killer addPlayerScores [1, 0, 0, 0, 0];
 								_killer addRating 150;
-								_killer spawn AKM;
+								_killer spawn kill;
 							};
 						};
 					};
@@ -151,7 +152,7 @@ addMissionEventHandler ["EntityKilled",
 							ratingScore = 50;
 							_killer addPlayerScores [1, 0, 0, 0, 0];
 							_killer addRating 150;
-							_killer spawn KM;
+							_killer spawn kill;
 						}
 						else
 						{
@@ -162,7 +163,7 @@ addMissionEventHandler ["EntityKilled",
 								ratingScore = 25;
 								_killer addPlayerScores [1, 0, 0, 0, 0];
 								_killer addRating 125;
-								_killer spawn KM;
+								_killer spawn kill;
 							}
 							else
 							{
@@ -172,7 +173,7 @@ addMissionEventHandler ["EntityKilled",
 									killType = "ENEMY KILLED";
 									_killer addPlayerScores [1, 0, 0, 0, 0];
 									_killer addRating 100;
-									_killer spawn KM;
+									_killer spawn kill;
 								};
 							};
 						};
@@ -194,7 +195,7 @@ addMissionEventHandler ["EntityKilled",
 						ratingScore = 400;
 						_killer addPlayerScores [0, 0, 0, 0, 0];
 						_killer addRating -500;
-						_killer spawn KM;
+						_killer spawn kill;
 					};
 					if (_killed isEqualTo _killer)
 					then
@@ -202,7 +203,7 @@ addMissionEventHandler ["EntityKilled",
 						killType = "SUICIDE";
 						_killer addPlayerScores [0, 0, 0, 0, 0];
 						_killer addRating -100;
-						_killer spawn KM;
+						_killer spawn kill;
 					};
 				};
 			};
