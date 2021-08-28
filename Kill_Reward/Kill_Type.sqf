@@ -10,17 +10,13 @@
 				if (!(vehicle _shooter isKindOf "LandVehicle") && !(vehicle _shooter isKindOf "Air") && !(vehicle _shooter isKindOf "Ship"))
 				then
 				{
-					if (!((side group _target) isEqualTo playerSide) && (_target isKindOf "CAManBase"))
+					if (isEnemy)
 					then
 					{
-						if (!isPlayer _target)
+						if (isPlayer _shooter)
 						then
 						{
-							if (isPlayer _shooter)
-							then
-							{
-								altKillType = "HEADSHOT";
-							};
+							altKillType = "HEADSHOT";
 						};
 					};
 				};
