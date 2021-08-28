@@ -39,10 +39,11 @@ addMissionEventHandler ["EntityKilled",
 	if(!local _killer) exitWith {};
 	
 	ratingScore = 0;
-	_headDamage = _killed getHitPointDamage "HitHead";
 	_distance = _killer distance _killed;
 	_minDistance = 100;
 	_cqbDistance = 2;
+	isFriendly = [(side group _killer),(side group _killed)] call BIS_fnc_sideIsFriendly;
+	isEnemy = [(side group _killer),(side group _killed)] call BIS_fnc_sideIsEnemy;
 	
 	KM = {[[killType]] call KillMsg;};
 	AKM = {[[altKillType]] call KillMsg;};
@@ -55,7 +56,7 @@ addMissionEventHandler ["EntityKilled",
 	if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
 	then
 	{
-		if !((side group _killed) isEqualTo playerSide)
+		if (isEnemy)
 		then
 		{
 			killType = "VEHICLE KILL";
@@ -68,7 +69,7 @@ addMissionEventHandler ["EntityKilled",
 		}
 		else
 		{
-			if ((side group _killed) isEqualTo playerSide)
+			if (isFriendly)
 			then
 			{
 				symbol = "-";
@@ -99,7 +100,7 @@ addMissionEventHandler ["EntityKilled",
 		if ((!(vehicle player isKindOf "LandVehicle") && !(vehicle player isKindOf "Air") && !(vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
 		then
 		{
-			if !((side group _killed) isEqualTo playerSide)
+			if (isEnemy)
 			then
 			{
 				symbol = "+";
@@ -180,7 +181,7 @@ addMissionEventHandler ["EntityKilled",
 			}
 			else
 			{
-				if ((side group _killed) isEqualTo playerSide)
+				if (isFriendly)
 				then
 				{
 					symbol = "-";
