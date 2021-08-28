@@ -139,41 +139,84 @@ addMissionEventHandler ["EntityKilled",
 							};
 						};
 					};
-				}	
+				}
 				else
 				{
 					if !(head)
 					then
 					{
-						if (_distance >= _minDistance)
+						if !(frag)
 						then
 						{
-							killType = "LONG RANGE KILL";
-							ratingScore = 50;
-							_killer addPlayerScores [1, 0, 0, 0, 0];
-							_killer addRating 150;
-							_killer spawn kill;
-						}
-						else
-						{
-							if (_distance <= _cqbDistance)
+							if (_distance >= _minDistance)
 							then
 							{
-								killType = "POINT BLANK KILL";
-								ratingScore = 25;
+								killType = "LONG RANGE KILL";
+								ratingScore = 50;
 								_killer addPlayerScores [1, 0, 0, 0, 0];
-								_killer addRating 125;
+								_killer addRating 150;
 								_killer spawn kill;
 							}
 							else
 							{
-								if ((_distance > _cqbDistance && {_distance < _minDistance}))
+								if (_distance <= _cqbDistance)
 								then
 								{
-									killType = "ENEMY KILLED";
+									killType = "POINT BLANK KILL";
+									ratingScore = 25;
 									_killer addPlayerScores [1, 0, 0, 0, 0];
-									_killer addRating 100;
+									_killer addRating 125;
 									_killer spawn kill;
+								}
+								else
+								{
+									if ((_distance > _cqbDistance && {_distance < _minDistance}))
+									then
+									{
+										killType = "ENEMY KILLED";
+										_killer addPlayerScores [1, 0, 0, 0, 0];
+										_killer addRating 100;
+										_killer spawn kill;
+									};
+								};
+							};
+						}
+						else
+						{
+							if (frag)
+							then
+							{
+								if (_distance >= _minDistance)
+								then
+								{
+									killType = "EXPLOSIVE KILL";
+									ratingScore = 50;
+									_killer addPlayerScores [1, 0, 0, 0, 0];
+									_killer addRating 150;
+									_killer spawn kill;
+								}
+								else
+								{
+									if (_distance <= _cqbDistance)
+									then
+									{
+										killType = "EXPLOSIVE KILL";
+										ratingScore = 25;
+										_killer addPlayerScores [1, 0, 0, 0, 0];
+										_killer addRating 125;
+										_killer spawn kill;
+									}
+									else
+									{
+										if ((_distance > _cqbDistance && {_distance < _minDistance}))
+										then
+										{
+											killType = "EXPLOSIVE KILL";
+											_killer addPlayerScores [1, 0, 0, 0, 0];
+											_killer addRating 100;
+											_killer spawn kill;
+										};
+									};
 								};
 							};
 						};
