@@ -23,7 +23,7 @@ if (ratingScore >= 0) then
 };
 [
 	parseText _messageContent, 
-	[safezoneX, safezoneY + safeZoneH * 0.55, safezoneW * 0.62, safeZoneH * 0.57], 
+	[safezoneX, safezoneY + safeZoneH * 0.51, safezoneW * 0.62, safeZoneH * 0.57], 
 	nil, 
 	1, 
 	0.7,
@@ -49,6 +49,11 @@ addMissionEventHandler ["EntityKilled",
 	if (isNull _instigator)
 	then
 	{
+		_instigator = UAVControl vehicle _killer select 0
+	};
+	if (isNull _instigator)
+	then
+	{
 		_instigator = _killer
 	};
 	if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
@@ -58,6 +63,47 @@ addMissionEventHandler ["EntityKilled",
 		then
 		{
 			killType = "VEHICLE KILL";
+			symbol = "+";
+			ratingScore = -50;
+			colour = "#ffff00";
+			_killer addPlayerScores [1, 0, 0, 0, 0];
+			_killer addRating 50;
+			_killer spawn kill;
+		}
+		else
+		{
+			if (isFriendly)
+			then
+			{
+				symbol = "-";
+				colour = "#ea0000";
+				if (_killed isNotEqualTo _killer)
+				then
+				{
+					killType = "FRIENDLY KILL";
+					ratingScore = 400;
+					_killer addPlayerScores [0, 0, 0, 0, 0];
+					_killer addRating -500;
+					_killer spawn kill;
+				};
+				if (_killed isEqualTo _killer)
+				then
+				{
+					killType = "SUICIDE";
+					_killer addPlayerScores [0, 0, 0, 0, 0];
+					_killer addRating -100;
+					_killer spawn kill;
+				};
+			};
+		};
+	};
+	if ((player in (UAVControl vehicle _killer)) && (_killed isKindOf "CAManBase"))
+	then
+	{
+		if !(isFriendly)
+		then
+		{
+			killType = "DRONE KILL";
 			symbol = "+";
 			ratingScore = -50;
 			colour = "#ffff00";
