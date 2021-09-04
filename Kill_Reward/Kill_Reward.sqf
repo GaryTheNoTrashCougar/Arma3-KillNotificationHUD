@@ -56,43 +56,206 @@ addMissionEventHandler ["EntityKilled",
 	{
 		_instigator = _killer
 	};
-	if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
+	if (vehicle player isEqualTo _killer)
 	then
 	{
-		if !(isFriendly)
+		if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
 		then
 		{
-			killType = "VEHICLE KILL";
-			symbol = "+";
-			ratingScore = -50;
-			colour = "#ffff00";
-			_killer addPlayerScores [1, 0, 0, 0, 0];
-			_killer addRating 50;
-			_killer spawn kill;
+			if !(isFriendly)
+			then
+			{
+				killType = "VEHICLE KILL";
+				symbol = "+";
+				ratingScore = -50;
+				colour = "#ffff00";
+				_killer addPlayerScores [1, 0, 0, 0, 0];
+				_killer addRating 50;
+				_killer spawn kill;
+			}
+			else
+			{
+				if (isFriendly)
+				then
+				{
+					symbol = "-";
+					colour = "#ea0000";
+					if (_killed isNotEqualTo _killer)
+					then
+					{
+						killType = "FRIENDLY KILL";
+						ratingScore = 400;
+						_killer addPlayerScores [0, 0, 0, 0, 0];
+						_killer addRating -500;
+						_killer spawn kill;
+					};
+					if (_killed isEqualTo _killer)
+					then
+					{
+						killType = "SUICIDE";
+						_killer addPlayerScores [0, 0, 0, 0, 0];
+						_killer addRating -100;
+						_killer spawn kill;
+					};
+				};
+			};
 		}
 		else
 		{
-			if (isFriendly)
+			if ((!(vehicle player isKindOf "LandVehicle") && !(vehicle player isKindOf "Air") && !(vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
 			then
 			{
-				symbol = "-";
-				colour = "#ea0000";
-				if (_killed isNotEqualTo _killer)
+				if !(isFriendly)
 				then
 				{
-					killType = "FRIENDLY KILL";
-					ratingScore = 400;
-					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer addRating -500;
-					_killer spawn kill;
-				};
-				if (_killed isEqualTo _killer)
-				then
+					symbol = "+";
+					colour = "#ffff00";
+					if (head)
+					then
+					{
+						if (_distance >= _minDistance)
+						then
+						{
+							killType = "HEADSHOT";
+							ratingScore = 100;
+							_killer addPlayerScores [1, 0, 0, 0, 0];
+							_killer addRating 200;
+							_killer spawn kill;
+						}
+						else
+						{
+							if (_distance <= _cqbDistance)
+							then
+							{
+								killType = "HEADSHOT";
+								ratingScore = 75;
+								_killer addPlayerScores [1, 0, 0, 0, 0];
+								_killer addRating 175;
+								_killer spawn kill;
+							}
+							else
+							{
+								if ((_distance > _cqbDistance && {_distance < _minDistance}))
+								then
+								{
+									killType = "HEADSHOT";
+									ratingScore = 50;
+									_killer addPlayerScores [1, 0, 0, 0, 0];
+									_killer addRating 150;
+									_killer spawn kill;
+								};
+							};
+						};
+					}
+					else
+					{
+						if !(head)
+						then
+						{
+							if !(frag)
+							then
+							{
+								if (_distance >= _minDistance)
+								then
+								{
+									killType = "LONG RANGE KILL";
+									ratingScore = 50;
+									_killer addPlayerScores [1, 0, 0, 0, 0];
+									_killer addRating 150;
+									_killer spawn kill;
+								}
+								else
+								{
+									if (_distance <= _cqbDistance)
+									then
+									{
+										killType = "POINT BLANK KILL";
+										ratingScore = 25;
+										_killer addPlayerScores [1, 0, 0, 0, 0];
+										_killer addRating 125;
+										_killer spawn kill;
+									}
+									else
+									{
+										if ((_distance > _cqbDistance && {_distance < _minDistance}))
+										then
+										{
+											killType = "ENEMY KILLED";
+											_killer addPlayerScores [1, 0, 0, 0, 0];
+											_killer addRating 100;
+											_killer spawn kill;
+										};
+									};
+								};
+							}
+							else
+							{
+								if (frag)
+								then
+								{
+									if (_distance >= _minDistance)
+									then
+									{
+										killType = "EXPLOSIVE KILL";
+										ratingScore = 50;
+										_killer addPlayerScores [1, 0, 0, 0, 0];
+										_killer addRating 150;
+										_killer spawn kill;
+									}
+									else
+									{
+										if (_distance <= _cqbDistance)
+										then
+										{
+											killType = "EXPLOSIVE KILL";
+											ratingScore = 25;
+											_killer addPlayerScores [1, 0, 0, 0, 0];
+											_killer addRating 125;
+											_killer spawn kill;
+										}
+										else
+										{
+											if ((_distance > _cqbDistance && {_distance < _minDistance}))
+											then
+											{
+												killType = "EXPLOSIVE KILL";
+												_killer addPlayerScores [1, 0, 0, 0, 0];
+												_killer addRating 100;
+												_killer spawn kill;
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				}
+				else
 				{
-					killType = "SUICIDE";
-					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer addRating -100;
-					_killer spawn kill;
+					if (isFriendly)
+					then
+					{
+						symbol = "-";
+						colour = "#ea0000";
+						
+						if (_killed isNotEqualTo _killer)
+						then
+						{
+							killType = "FRIENDLY KILL";
+							ratingScore = 400;
+							_killer addPlayerScores [0, 0, 0, 0, 0];
+							_killer addRating -500;
+							_killer spawn kill;
+						};
+						if (_killed isEqualTo _killer)
+						then
+						{
+							killType = "SUICIDE";
+							_killer addPlayerScores [0, 0, 0, 0, 0];
+							_killer addRating -100;
+							_killer spawn kill;
+						};
+					};
 				};
 			};
 		};
@@ -134,166 +297,6 @@ addMissionEventHandler ["EntityKilled",
 					_killer addPlayerScores [0, 0, 0, 0, 0];
 					_killer addRating -100;
 					_killer spawn kill;
-				};
-			};
-		};
-	};
-	if (vehicle player isEqualTo _killer)
-	then
-	{
-		if ((!(vehicle player isKindOf "LandVehicle") && !(vehicle player isKindOf "Air") && !(vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
-		then
-		{
-			if !(isFriendly)
-			then
-			{
-				symbol = "+";
-				colour = "#ffff00";
-				if (head)
-				then
-				{
-					if (_distance >= _minDistance)
-					then
-					{
-						killType = "HEADSHOT";
-						ratingScore = 100;
-						_killer addPlayerScores [1, 0, 0, 0, 0];
-						_killer addRating 200;
-						_killer spawn kill;
-					}
-					else
-					{
-						if (_distance <= _cqbDistance)
-						then
-						{
-							killType = "HEADSHOT";
-							ratingScore = 75;
-							_killer addPlayerScores [1, 0, 0, 0, 0];
-							_killer addRating 175;
-							_killer spawn kill;
-						}
-						else
-						{
-							if ((_distance > _cqbDistance && {_distance < _minDistance}))
-							then
-							{
-								killType = "HEADSHOT";
-								ratingScore = 50;
-								_killer addPlayerScores [1, 0, 0, 0, 0];
-								_killer addRating 150;
-								_killer spawn kill;
-							};
-						};
-					};
-				}
-				else
-				{
-					if !(head)
-					then
-					{
-						if !(frag)
-						then
-						{
-							if (_distance >= _minDistance)
-							then
-							{
-								killType = "LONG RANGE KILL";
-								ratingScore = 50;
-								_killer addPlayerScores [1, 0, 0, 0, 0];
-								_killer addRating 150;
-								_killer spawn kill;
-							}
-							else
-							{
-								if (_distance <= _cqbDistance)
-								then
-								{
-									killType = "POINT BLANK KILL";
-									ratingScore = 25;
-									_killer addPlayerScores [1, 0, 0, 0, 0];
-									_killer addRating 125;
-									_killer spawn kill;
-								}
-								else
-								{
-									if ((_distance > _cqbDistance && {_distance < _minDistance}))
-									then
-									{
-										killType = "ENEMY KILLED";
-										_killer addPlayerScores [1, 0, 0, 0, 0];
-										_killer addRating 100;
-										_killer spawn kill;
-									};
-								};
-							};
-						}
-						else
-						{
-							if (frag)
-							then
-							{
-								if (_distance >= _minDistance)
-								then
-								{
-									killType = "EXPLOSIVE KILL";
-									ratingScore = 50;
-									_killer addPlayerScores [1, 0, 0, 0, 0];
-									_killer addRating 150;
-									_killer spawn kill;
-								}
-								else
-								{
-									if (_distance <= _cqbDistance)
-									then
-									{
-										killType = "EXPLOSIVE KILL";
-										ratingScore = 25;
-										_killer addPlayerScores [1, 0, 0, 0, 0];
-										_killer addRating 125;
-										_killer spawn kill;
-									}
-									else
-									{
-										if ((_distance > _cqbDistance && {_distance < _minDistance}))
-										then
-										{
-											killType = "EXPLOSIVE KILL";
-											_killer addPlayerScores [1, 0, 0, 0, 0];
-											_killer addRating 100;
-											_killer spawn kill;
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			}
-			else
-			{
-				if (isFriendly)
-				then
-				{
-					symbol = "-";
-					colour = "#ea0000";
-					
-					if (_killed isNotEqualTo _killer)
-					then
-					{
-						killType = "FRIENDLY KILL";
-						ratingScore = 400;
-						_killer addPlayerScores [0, 0, 0, 0, 0];
-						_killer addRating -500;
-						_killer spawn kill;
-					};
-					if (_killed isEqualTo _killer)
-					then
-					{
-						killType = "SUICIDE";
-						_killer addPlayerScores [0, 0, 0, 0, 0];
-						_killer addRating -100;
-						_killer spawn kill;
-					};
 				};
 			};
 		};
