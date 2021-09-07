@@ -8,12 +8,12 @@ ratingScore = [];
 colour = "";
 
 KillMsg = {
-_messages = _this;
-_messageContent = "<t align='right' size='1.25'>";
+private _messages = _this;
+private _messageContent = "<t align='right'>";
 {
-	_scoreName = _x select 0;
+	private _scoreName = _x select 0;
 	ratingScore = ratingScore + 100;
-	_messageContent = _messageContent + format ["<t font='PuristaSemibold'>%1</t>%2<br/>", _scoreName];
+	_messageContent = _messageContent + format ["<t font='PuristaSemibold' size='1.25'>%1</t><br/>", _scoreName];
 } 
 forEach _messages;
 _messageContent = _messageContent + "</t>";
@@ -31,18 +31,19 @@ if (ratingScore >= 0) then
 ]
 spawn BIS_fnc_textTiles;};
 
-execVM "Kill_Reward\Kill_Type.sqf";
 addMissionEventHandler ["EntityKilled", 
 {
-	params ["_killed", "_killer"];
+	params ["_killed", "_killer", "_instigator"];
 	
-	if(!local _killer) exitWith {};
+	if(!local player) exitWith {};
 	
 	ratingScore = 0;
-	_distance = _killer distance _killed;
-	_minDistance = 100;
-	_cqbDistance = 2;
-	isFriendly = [(side group _killer),(side group _killed)] call BIS_fnc_sideIsFriendly;
+	isFriendly = [(side group player),(side group _killed)] call BIS_fnc_sideIsFriendly;
+	private _distance = _killer distance _killed;
+	private _minDistance = 100;
+	private _cqbDistance = 2;
+	private _assisters = (_killed getVariable ["shooterIndex",[]]) - [_instigator, objNull];
+	_assisters = if (_assisters isEqualTo []) then [{""},{format ["assisters: %1", _assisters apply {name _x}] }];
 	
 	kill = {[[killType]] call KillMsg;};
 	
@@ -69,9 +70,9 @@ addMissionEventHandler ["EntityKilled",
 				symbol = "+";
 				ratingScore = -50;
 				colour = "#ffff00";
-				_killer addPlayerScores [1, 0, 0, 0, 0];
-				_killer addRating 50;
-				_killer spawn kill;
+				player addPlayerScores [1, 0, 0, 0, 0];
+				player addRating 50;
+				player spawn kill;
 			}
 			else
 			{
@@ -85,17 +86,17 @@ addMissionEventHandler ["EntityKilled",
 					{
 						killType = "FRIENDLY KILL";
 						ratingScore = 400;
-						_killer addPlayerScores [0, 0, 0, 0, 0];
-						_killer addRating -500;
-						_killer spawn kill;
+						player addPlayerScores [0, 0, 0, 0, 0];
+						player addRating -500;
+						player spawn kill;
 					};
 					if (_killed isEqualTo _killer)
 					then
 					{
 						killType = "SUICIDE";
-						_killer addPlayerScores [0, 0, 0, 0, 0];
-						_killer addRating -100;
-						_killer spawn kill;
+						player addPlayerScores [0, 0, 0, 0, 0];
+						player addRating -100;
+						player spawn kill;
 					};
 				};
 			};
@@ -118,9 +119,9 @@ addMissionEventHandler ["EntityKilled",
 						{
 							killType = "HEADSHOT";
 							ratingScore = 100;
-							_killer addPlayerScores [1, 0, 0, 0, 0];
-							_killer addRating 200;
-							_killer spawn kill;
+							player addPlayerScores [1, 0, 0, 0, 0];
+							player addRating 200;
+							player spawn kill;
 						}
 						else
 						{
@@ -129,9 +130,9 @@ addMissionEventHandler ["EntityKilled",
 							{
 								killType = "HEADSHOT";
 								ratingScore = 75;
-								_killer addPlayerScores [1, 0, 0, 0, 0];
-								_killer addRating 175;
-								_killer spawn kill;
+								player addPlayerScores [1, 0, 0, 0, 0];
+								player addRating 175;
+								player spawn kill;
 							}
 							else
 							{
@@ -140,9 +141,9 @@ addMissionEventHandler ["EntityKilled",
 								{
 									killType = "HEADSHOT";
 									ratingScore = 50;
-									_killer addPlayerScores [1, 0, 0, 0, 0];
-									_killer addRating 150;
-									_killer spawn kill;
+									player addPlayerScores [1, 0, 0, 0, 0];
+									player addRating 150;
+									player spawn kill;
 								};
 							};
 						};
@@ -160,9 +161,9 @@ addMissionEventHandler ["EntityKilled",
 								{
 									killType = "LONG RANGE KILL";
 									ratingScore = 50;
-									_killer addPlayerScores [1, 0, 0, 0, 0];
-									_killer addRating 150;
-									_killer spawn kill;
+									player addPlayerScores [1, 0, 0, 0, 0];
+									player addRating 150;
+									player spawn kill;
 								}
 								else
 								{
@@ -171,9 +172,9 @@ addMissionEventHandler ["EntityKilled",
 									{
 										killType = "POINT BLANK KILL";
 										ratingScore = 25;
-										_killer addPlayerScores [1, 0, 0, 0, 0];
-										_killer addRating 125;
-										_killer spawn kill;
+										player addPlayerScores [1, 0, 0, 0, 0];
+										player addRating 125;
+										player spawn kill;
 									}
 									else
 									{
@@ -181,9 +182,9 @@ addMissionEventHandler ["EntityKilled",
 										then
 										{
 											killType = "ENEMY KILLED";
-											_killer addPlayerScores [1, 0, 0, 0, 0];
-											_killer addRating 100;
-											_killer spawn kill;
+											player addPlayerScores [1, 0, 0, 0, 0];
+											player addRating 100;
+											player spawn kill;
 										};
 									};
 								};
@@ -198,9 +199,9 @@ addMissionEventHandler ["EntityKilled",
 									{
 										killType = "EXPLOSIVE KILL";
 										ratingScore = 50;
-										_killer addPlayerScores [1, 0, 0, 0, 0];
-										_killer addRating 150;
-										_killer spawn kill;
+										player addPlayerScores [1, 0, 0, 0, 0];
+										player addRating 150;
+										player spawn kill;
 									}
 									else
 									{
@@ -209,9 +210,9 @@ addMissionEventHandler ["EntityKilled",
 										{
 											killType = "EXPLOSIVE KILL";
 											ratingScore = 25;
-											_killer addPlayerScores [1, 0, 0, 0, 0];
-											_killer addRating 125;
-											_killer spawn kill;
+											player addPlayerScores [1, 0, 0, 0, 0];
+											player addRating 125;
+											player spawn kill;
 										}
 										else
 										{
@@ -219,9 +220,9 @@ addMissionEventHandler ["EntityKilled",
 											then
 											{
 												killType = "EXPLOSIVE KILL";
-												_killer addPlayerScores [1, 0, 0, 0, 0];
-												_killer addRating 100;
-												_killer spawn kill;
+												player addPlayerScores [1, 0, 0, 0, 0];
+												player addRating 100;
+												player spawn kill;
 											};
 										};
 									};
@@ -243,17 +244,17 @@ addMissionEventHandler ["EntityKilled",
 						{
 							killType = "FRIENDLY KILL";
 							ratingScore = 400;
-							_killer addPlayerScores [0, 0, 0, 0, 0];
-							_killer addRating -500;
-							_killer spawn kill;
+							player addPlayerScores [0, 0, 0, 0, 0];
+							player addRating -500;
+							player spawn kill;
 						};
 						if (_killed isEqualTo _killer)
 						then
 						{
 							killType = "SUICIDE";
-							_killer addPlayerScores [0, 0, 0, 0, 0];
-							_killer addRating -100;
-							_killer spawn kill;
+							player addPlayerScores [0, 0, 0, 0, 0];
+							player addRating -100;
+							player spawn kill;
 						};
 					};
 				};
@@ -270,9 +271,9 @@ addMissionEventHandler ["EntityKilled",
 			symbol = "+";
 			ratingScore = -50;
 			colour = "#ffff00";
-			_killer addPlayerScores [1, 0, 0, 0, 0];
-			_killer addRating 50;
-			_killer spawn kill;
+			player addPlayerScores [1, 0, 0, 0, 0];
+			player addRating 50;
+			player spawn kill;
 		}
 		else
 		{
@@ -286,19 +287,73 @@ addMissionEventHandler ["EntityKilled",
 				{
 					killType = "FRIENDLY KILL";
 					ratingScore = 400;
-					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer addRating -500;
-					_killer spawn kill;
+					player addPlayerScores [0, 0, 0, 0, 0];
+					player addRating -500;
+					player spawn kill;
 				};
 				if (_killed isEqualTo _killer)
 				then
 				{
 					killType = "SUICIDE";
-					_killer addPlayerScores [0, 0, 0, 0, 0];
-					_killer addRating -100;
-					_killer spawn kill;
+					player addPlayerScores [0, 0, 0, 0, 0];
+					player addRating -100;
+					player spawn kill;
 				};
 			};
 		};
 	};
+	if !(vehicle player isEqualTo _killer)
+	then
+	{
+		if (name player in _assisters)
+		then
+		{
+			if !(isFriendly)
+			then
+			{
+				killType = "ASSIST";
+				symbol = "+";
+				ratingScore = -80;
+				colour = "#ffff00";
+				player addPlayerScores [0, 0, 0, 0, 0];
+				player addRating 20;
+				player spawn kill;
+			};
+		};
+	};
 }];
+
+0 = [] spawn
+{
+	while {true} do
+	{
+		{
+			_x addEventHandler ["HitPart",
+			{
+				(_this select 0) params ["_target", "_shooter", "_projectile", "_position", "_velocity", "_selection", "_ammo", "_vector", "_radius", "_surfaceType", "_isDirect"];
+				head = ("head" in (_this select 0 select 5));
+				frag = (_isDirect isEqualTo false);
+			}];
+		_x setVariable ["passedThatHitPart",TRUE];
+		} forEach (allUnits select {isNil {_x getVariable "passedThatHitPart"}});
+	sleep 2;
+	};
+};
+
+0 = [] spawn
+{
+	while {true} do
+	{
+		{
+			_x  setVariable ["shooterIndex",[]];
+			_x  addEventHandler ["HandleDamage",
+			{
+				params ["_unit", "_selection", "_damage", "_source", "_projectile", "_hitIndex", "_instigator", "_hitPoint"];
+				(_unit getVariable "shooterIndex") pushBackUnique _instigator;
+				_damage
+			}];
+		_x setVariable ["passedThatHandleDamage",TRUE];
+		} forEach (allUnits select {isNil {_x getVariable "passedThatHandleDamage"}});
+	sleep 2;
+	};
+};
