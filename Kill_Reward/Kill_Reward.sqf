@@ -50,14 +50,9 @@ addMissionEventHandler ["EntityKilled",
 	if (isNull _instigator)
 	then
 	{
-		_instigator = UAVControl vehicle _killer select 0
-	};
-	if (isNull _instigator)
-	then
-	{
 		_instigator = _killer
 	};
-	if (vehicle player isEqualTo _killer)
+	if (((driver (vehicle player)) isEqualTo player) && (player isEqualTo _killer))
 	then
 	{
 		if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
@@ -66,7 +61,7 @@ addMissionEventHandler ["EntityKilled",
 			if !(isFriendly)
 			then
 			{
-				killType = "VEHICLE KILL";
+				killType = "ROAD KILL";
 				symbol = "+";
 				ratingScore = -50;
 				colour = "#ffff00";
@@ -261,6 +256,51 @@ addMissionEventHandler ["EntityKilled",
 			};
 		};
 	};
+	if (vehicle player isEqualTo _killer)
+	then
+	{
+		if (((vehicle player isKindOf "LandVehicle") || (vehicle player isKindOf "Air") || (vehicle player isKindOf "Ship")) && (_killed isKindOf "CAManBase"))
+		then
+		{
+			if !(isFriendly)
+			then
+			{
+				killType = "VEHICLE KILL";
+				symbol = "+";
+				ratingScore = -50;
+				colour = "#ffff00";
+				player addPlayerScores [1, 0, 0, 0, 0];
+				player addRating 50;
+				player spawn kill;
+			}
+			else
+			{
+				if (isFriendly)
+				then
+				{
+					symbol = "-";
+					colour = "#ea0000";
+					if (_killed isNotEqualTo _killer)
+					then
+					{
+						killType = "FRIENDLY KILL";
+						ratingScore = 400;
+						player addPlayerScores [0, 0, 0, 0, 0];
+						player addRating -500;
+						player spawn kill;
+					};
+					if (_killed isEqualTo _killer)
+					then
+					{
+						killType = "SUICIDE";
+						player addPlayerScores [0, 0, 0, 0, 0];
+						player addRating -100;
+						player spawn kill;
+					};
+				};
+			};
+		};
+	};
 	if ((player in (UAVControl vehicle _killer)) && (_killed isKindOf "CAManBase"))
 	then
 	{
@@ -302,7 +342,7 @@ addMissionEventHandler ["EntityKilled",
 			};
 		};
 	};
-	if !(vehicle player isEqualTo _killer)
+	if !((driver (vehicle player)) isEqualTo _killer)
 	then
 	{
 		if (name player in _assisters)
