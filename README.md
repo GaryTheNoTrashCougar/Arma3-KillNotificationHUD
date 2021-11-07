@@ -7,9 +7,8 @@ Click on image to watch video!
 
 Kill Notifications:
 * ENEMY KILLED
-* FRIENDLY KILLED
-* SUICIDE
 * HEADSHOT
+* PAYBACK
 * LONG RANGE KILL
 * POINT BLANK KILL
 * EXPLOSIVE KILL
@@ -18,4 +17,7 @@ Kill Notifications:
 * DRONE KILL
 * ASSIST
 
-To add this to your mission simply copy the files & folders to your Arma 3 mission folder. You may have to copy & paste the contents of `initPlayerLocal.sqf` if you already have this file in your mission.
+Notifications are customizable along with other HUD options.
+Options can be found & changed in `Settings.sqf`.
+
+To add this to your mission simply copy the files & folders to your Arma 3 mission folder. You may have to copy & paste the contents of `initPlayerLocal.sqf` & `description.ext` if you already have these files in your mission folder.
