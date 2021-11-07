@@ -1,3 +1,10 @@
+class RscTitles
+{
+	#include "\Kill_Confirmed\Score_Table\Score_Table_HPP.hpp"
+	#include "\Kill_Confirmed\Hit_Markers\Hit_Markers_HPP.hpp"
+	#include "\Kill_Confirmed\Health_Status\Health_Status_HPP.hpp"
+};
+
 class CfgSounds
 {
 	sounds[] = {};
