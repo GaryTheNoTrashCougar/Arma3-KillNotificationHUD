@@ -39,17 +39,17 @@ then
 	if (isMultiplayer)
 	then
 	{
-		[] execVM "Score_Table\Score_Table_MP.sqf";
+		[] execVM "Kill_Confirmed\Score_Table\Score_Table_MP.sqf";
 	}
 	else
 	{
-		[] execVM "Score_Table\Score_Table_SP.sqf";
+		[] execVM "Kill_Confirmed\Score_Table\Score_Table_SP.sqf";
 	};
 };
 
-if (KC_HealthStatus) then {[] execVM "Health_Status\Health_Status.sqf";};
+if (KC_HealthStatus) then {[] execVM "Kill_Confirmed\Health_Status\Health_Status.sqf";};
 
-if (KC_CompDisp) then {[] execVM "Compass_Display\Compass_Display.sqf";};
+if (KC_CompDisp) then {[] execVM "Kill_Confirmed\Compass_Display\Compass_Display.sqf";};
 
 if (KC_HitMarkerStyle isEqualTo 1)
 then
