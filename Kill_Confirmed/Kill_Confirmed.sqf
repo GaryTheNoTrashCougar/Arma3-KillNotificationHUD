@@ -31,7 +31,7 @@ KC_kill =
 	};
 };
 
-#include "\Kill_Confirmed\KC_killMsg.sqf"
+#include "Kill_Confirmed\KC_killMsg.sqf"
 
 if (KC_showScore)
 then
@@ -39,17 +39,17 @@ then
 	if (isMultiplayer)
 	then
 	{
-		[] execVM "\Kill_Confirmed\Score_Table\Score_Table_MP.sqf";
+		[] execVM "Kill_Confirmed\Score_Table\Score_Table_MP.sqf";
 	}
 	else
 	{
-		[] execVM "\Kill_Confirmed\Score_Table\Score_Table_SP.sqf";
+		[] execVM "Kill_Confirmed\Score_Table\Score_Table_SP.sqf";
 	};
 };
 
-if (KC_HealthStatus) then {[] execVM "\Kill_Confirmed\Health_Status\Health_Status.sqf";};
+if (KC_HealthStatus) then {[] execVM "Kill_Confirmed\Health_Status\Health_Status.sqf";};
 
-if (KC_CompDisp) then {[] execVM "\Kill_Confirmed\Compass_Display\Compass_Display.sqf";};
+if (KC_CompDisp) then {[] execVM "Kill_Confirmed\Compass_Display\Compass_Display.sqf";};
 
 if (KC_HitMarkerStyle isEqualTo 1)
 then
