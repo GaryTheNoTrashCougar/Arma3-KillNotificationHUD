@@ -1,1 +1,1 @@
-[] execVM "Kill_Confirmed\Customization.sqf";
+[] execVM "Kill_Confirmed\Settings.sqf";
