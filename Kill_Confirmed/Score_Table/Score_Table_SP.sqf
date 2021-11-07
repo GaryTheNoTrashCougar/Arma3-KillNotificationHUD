@@ -22,13 +22,13 @@ disableSerialization;
 		
 		((uiNamespace getVariable "Score_Table") displayCtrl 90000) ctrlSetStructuredText parseText format
 		["
-		<img size='1' image='\Kill_Confirmed\Score_Table\data\scoreIcon_ca.paa'/>
-		<img size='0.5' image='\Kill_Confirmed\Score_Table\data\emptyIcon_ca.paa'/>
-		<img size='1' image='\Kill_Confirmed\Score_Table\data\killsIcon_ca.paa'/>
-		<img size='0.5' image='\Kill_Confirmed\Score_Table\data\emptyIcon_ca.paa'/>
-		<img size='1' image='\Kill_Confirmed\Score_Table\data\assistIcon_ca.paa'/>
-		<img size='0.5' image='\Kill_Confirmed\Score_Table\data\emptyIcon_ca.paa'/>
-		<img size='1' image='\Kill_Confirmed\Score_Table\data\deathsIcon_ca.paa'/>"
+		<img size='1' image='Kill_Confirmed\Score_Table\data\scoreIcon_ca.paa'/>
+		<img size='0.5' image='Kill_Confirmed\Score_Table\data\emptyIcon_ca.paa'/>
+		<img size='1' image='Kill_Confirmed\Score_Table\data\killsIcon_ca.paa'/>
+		<img size='0.5' image='Kill_Confirmed\Score_Table\data\emptyIcon_ca.paa'/>
+		<img size='1' image='Kill_Confirmed\Score_Table\data\assistIcon_ca.paa'/>
+		<img size='0.5' image='Kill_Confirmed\Score_Table\data\emptyIcon_ca.paa'/>
+		<img size='1' image='Kill_Confirmed\Score_Table\data\deathsIcon_ca.paa'/>"
 		];
 		
 		((uiNamespace getVariable "Score_Table") displayCtrl 90001) ctrlSetStructuredText parseText format
