@@ -22,7 +22,7 @@ class KC_HitMarker1
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker1_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker1_ca.paa";
 	};
 };
 class KC_HitMarker2
@@ -49,7 +49,7 @@ class KC_HitMarker2
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker2_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker2_ca.paa";
 	};
 };
 class KC_HitMarker3
@@ -76,7 +76,7 @@ class KC_HitMarker3
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker3_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker3_ca.paa";
 	};
 };
 class KC_HitMarker4
@@ -103,7 +103,7 @@ class KC_HitMarker4
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker4_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker4_ca.paa";
 	};
 };
 class KC_HitMarker5
@@ -130,7 +130,7 @@ class KC_HitMarker5
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker5_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker5_ca.paa";
 	};
 };
 class KC_HitMarker6
@@ -157,7 +157,7 @@ class KC_HitMarker6
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker6_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker6_ca.paa";
 	};
 };
 class KC_HitMarker7
@@ -184,7 +184,7 @@ class KC_HitMarker7
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker7_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker7_ca.paa";
 	};
 };
 class KC_HitMarker8
@@ -211,7 +211,7 @@ class KC_HitMarker8
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker8_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker8_ca.paa";
 	};
 };
 class KC_HitMarker9
@@ -238,7 +238,7 @@ class KC_HitMarker9
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker9_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker9_ca.paa";
 	};
 };
 class KC_HitMarker10
@@ -265,7 +265,7 @@ class KC_HitMarker10
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker10_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker10_ca.paa";
 	};
 };
 class KC_HitMarker11
@@ -292,7 +292,7 @@ class KC_HitMarker11
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker11_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker11_ca.paa";
 	};
 };
 class KC_HitMarker12
@@ -319,7 +319,7 @@ class KC_HitMarker12
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker12_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker12_ca.paa";
 	};
 };
 class KC_HitMarker13
@@ -346,7 +346,7 @@ class KC_HitMarker13
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker13_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker13_ca.paa";
 	};
 };
 class KC_HitMarker14
@@ -373,7 +373,7 @@ class KC_HitMarker14
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker14_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker14_ca.paa";
 	};
 };
 class KC_HitMarker15
@@ -400,7 +400,7 @@ class KC_HitMarker15
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,1,1,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker15_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker15_ca.paa";
 	};
 };
 class KC_KillMarker1
@@ -427,7 +427,7 @@ class KC_KillMarker1
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker1_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker1_ca.paa";
 	};
 };
 class KC_KillMarker2
@@ -454,7 +454,7 @@ class KC_KillMarker2
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker2_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker2_ca.paa";
 	};
 };
 class KC_KillMarker3
@@ -481,7 +481,7 @@ class KC_KillMarker3
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker3_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker3_ca.paa";
 	};
 };
 class KC_KillMarker4
@@ -508,7 +508,7 @@ class KC_KillMarker4
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker4_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker4_ca.paa";
 	};
 };
 class KC_KillMarker5
@@ -535,7 +535,7 @@ class KC_KillMarker5
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker5_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker5_ca.paa";
 	};
 };
 class KC_KillMarker6
@@ -562,7 +562,7 @@ class KC_KillMarker6
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker6_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker6_ca.paa";
 	};
 };
 class KC_KillMarker7
@@ -589,7 +589,7 @@ class KC_KillMarker7
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker7_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker7_ca.paa";
 	};
 };
 class KC_KillMarker8
@@ -616,7 +616,7 @@ class KC_KillMarker8
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker8_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker8_ca.paa";
 	};
 };
 class KC_KillMarker9
@@ -643,7 +643,7 @@ class KC_KillMarker9
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker9_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker9_ca.paa";
 	};
 };
 class KC_KillMarker10
@@ -670,7 +670,7 @@ class KC_KillMarker10
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker10_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker10_ca.paa";
 	};
 };
 class KC_KillMarker11
@@ -697,7 +697,7 @@ class KC_KillMarker11
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker11_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker11_ca.paa";
 	};
 };
 class KC_KillMarker12
@@ -724,7 +724,7 @@ class KC_KillMarker12
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker12_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker12_ca.paa";
 	};
 };
 class KC_KillMarker13
@@ -751,7 +751,7 @@ class KC_KillMarker13
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker13_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker13_ca.paa";
 	};
 };
 class KC_KillMarker14
@@ -778,7 +778,7 @@ class KC_KillMarker14
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker14_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker14_ca.paa";
 	};
 };
 class KC_KillMarker15
@@ -805,6 +805,6 @@ class KC_KillMarker15
 		sizeEx = 0;
 		colorBackground[] = {0,0,0,0};
 		colorText[] = {1,0,0,1};
-		text = "\Kill_Confirmed\Hit_Markers\hitMarker15_ca.paa";
+		text = "Kill_Confirmed\Hit_Markers\hitMarker15_ca.paa";
 	};
 };
