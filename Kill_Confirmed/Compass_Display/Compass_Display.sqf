@@ -15,7 +15,7 @@ CD_compileComp =
 		CD_grpBG ctrlCommit 0;
 
 		CD_compImg = _display ctrlCreate ["RscPicture", 94002, CD_ctrlGrp];
-		CD_compImg ctrlSetText "\Kill_Confirmed\Compass_Display\data\compass_ca.paa";
+		CD_compImg ctrlSetText "Kill_Confirmed\Compass_Display\data\compass_ca.paa";
 		CD_compImg ctrlCommit 0;
 
 		CD_dirInd = _display ctrlCreate ["RscStructuredText", 94003];
@@ -48,7 +48,7 @@ CD_compileComp =
 			_width = 0.96 * safezoneW;
 			_calc = ((_width/570) * _bearing)* 100 + (_width/570) * 45;
 			(CD_compImg#0) ctrlSetPosition [_calc - _calc*2,-0.01,_width,1.8 * safezoneH];
-			(CD_compImg#0) ctrlSetText "\Kill_Confirmed\Compass_Display\data\compass_ca.paa";;
+			(CD_compImg#0) ctrlSetText "Kill_Confirmed\Compass_Display\data\compass_ca.paa";;
 			(CD_compImg#0) ctrlCommit 0;
 		}];
 		
