@@ -65,10 +65,10 @@ KC_classComp = "ItemCompass"; // Enter class name of the compass required
 
 //==================================================================================================================================================================================================================================================================================================================================================
 
-#include "\Kill_Confirmed\Kill_Confirmed.sqf"
+#include "Kill_Confirmed\Kill_Confirmed.sqf"
 
-#include "\Kill_Confirmed\KC_EntityKilled.sqf"
+#include "Kill_Confirmed\KC_EntityKilled.sqf"
 
-#include "\Kill_Confirmed\KC_HitPart.sqf"
+#include "Kill_Confirmed\KC_HitPart.sqf"
 
-#include "\Kill_Confirmed\KC_HandleDamage.sqf"
+#include "Kill_Confirmed\KC_HandleDamage.sqf"
