@@ -16,10 +16,10 @@ KC_sizeS = 1.4; // Numerical value - 0 = Disabled
 KC_colourS = [1, 1, 0]; // Array [R, G, B] each value range 0 - 1
 
 // Notification Position X
-KC_posX = 0.62; // Numerical value (range 0 - 1) - 0 = Left, 1 = Right
+KC_posX = 0.62; // Numerical value (range at recommended size* 0.7 - 1) - 0.7 = Left, 1 = Right  *based on 2560x1440 resolution with interface size set to small
 
 // Notification Position Y
-KC_posY = 0.51; // Numerical value (range 0 - 1) - 0 = Top, 1 = Bottom
+KC_posY = 0.51; // Numerical value (range at recommended size* 0 - 0.94) - 0 = Top, 0.94 = Bottom  *based on 2560x1440 resolution with interface size set to small
 
 // Hit Markers
 KC_HitMarkers = false; // Boolean - true = enabled, false = disabled
