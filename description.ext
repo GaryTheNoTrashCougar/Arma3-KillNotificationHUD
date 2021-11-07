@@ -1,0 +1,83 @@
+class CfgSounds
+{
+	sounds[] = {};
+	
+	class KC_HitSound1
+	{
+		name = "KC_HitSound1";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound1.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound2
+	{
+		name = "KC_HitSound2";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound2.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound3
+	{
+		name = "KC_HitSound3";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound3.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound4
+	{
+		name = "KC_HitSound4";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound4.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound5
+	{
+		name = "KC_HitSound5";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound5.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound6
+	{
+		name = "KC_HitSound6";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound6.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound7
+	{
+		name = "KC_HitSound7";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound7.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitSound8
+	{
+		name = "KC_HitSound8";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitSound8.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitHeadSound1
+	{
+		name = "KC_HitSound1";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitHeadSound1.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitHeadSound2
+	{
+		name = "KC_HitSound2";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitHeadSound2.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HitHeadSound3
+	{
+		name = "KC_HitSound3";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HitHeadSound3.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_HeadshotSound
+	{
+		name = "KC_HeadshotSound";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_HeadshotSound.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+	class KC_KillSound
+	{
+		name = "KC_KillSound";
+		sound[] = {"\Kill_Confirmed\Hit_Markers\sound\KC_KillSound.ogg", db+2, 1,100};
+		titles[] = {};
+	};
+};
