@@ -37,7 +37,7 @@ disableSerialization;
 		{
 			((uiNamespace getVariable "Health_Status") displayCtrl 92000) ctrlSetStructuredText parseText format
 			["
-			<img size='0.75' image='\Kill_Confirmed\Health_Status\data\healthIcon_ca.paa'/><t shadow='1' shadowColor='#000000' color='%1'>  %2</t>",
+			<img size='0.75' image='Kill_Confirmed\Health_Status\data\healthIcon_ca.paa'/><t shadow='1' shadowColor='#000000' color='%1'>  %2</t>",
 			_colHealth,
 			_health
 			];
@@ -47,7 +47,7 @@ disableSerialization;
 			{
 				((uiNamespace getVariable "Health_Status") displayCtrl 91998) ctrlSetStructuredText parseText format
 				["
-				<img size='0.75' image='\Kill_Confirmed\Health_Status\data\firstAid_ca.paa'/><t shadow='1' shadowColor='#000000' color='%1'>  %2</t>",
+				<img size='0.75' image='Kill_Confirmed\Health_Status\data\firstAid_ca.paa'/><t shadow='1' shadowColor='#000000' color='%1'>  %2</t>",
 				_colDef,
 				_numKits
 				];
@@ -59,7 +59,7 @@ disableSerialization;
 		{
 			((uiNamespace getVariable "Health_Status") displayCtrl 91999) ctrlSetStructuredText parseText format
 			["
-			<t valign='top' shadow='1' shadowColor='#000000' color='%1'>%2  </t><img valign='middle' size='0.6' image='\Kill_Confirmed\Health_Status\data\health_%2_ca.paa'/>",
+			<t valign='top' shadow='1' shadowColor='#000000' color='%1'>%2  </t><img valign='middle' size='0.6' image='Kill_Confirmed\Health_Status\data\health_%2_ca.paa'/>",
 			_colHealth,
 			_health
 			];
