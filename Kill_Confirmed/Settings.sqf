@@ -1,4 +1,4 @@
-//=========================OPTIONS==================================================================================================================================================================================================================================================================================================================
+//=========================SETTINGS=================================================================================================================================================================================================================================================================================================================
 
 // Notification Style
 KC_fontN = "PuristaSemibold"; // Select Font - Bitstream, Caveat, EtelkaMonospacePro, EtelkaMonospaceProBold, EtelkaNarrowMediumPro, LCD14, LucidaConsoleB, PuristaBold, PuristaLight, PuristaMedium, PuristaSemibold, RobotoCondensed, RobotoCondensedBold, RobotoCondensedLight, TahomaB, Zeppelin32, Zeppelin32Mono, Zeppelin33, Zeppelin33Italic
