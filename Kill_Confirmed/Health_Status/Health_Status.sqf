@@ -20,7 +20,10 @@ disableSerialization;
 			_rscLayer cutRsc ["Health_Status","PLAIN",1,false];
 		};
 		
-		_numKits = {KC_classFAK == _x} count (items player);
+		_fak1 = {KC_classFAK1 == _x} count (items player);
+		_fak2 = {KC_classFAK2 == _x} count (items player);
+		_fak3 = {KC_classFAK3 == _x} count (items player);
+		_numKits = (_fak1 + _fak2 + _fak3);
 		_health = round ((1 - (damage player)) * 100);
 		_colDef = parseText "#FBFCFE";  
 		_colHurt = parseText "#C72650"; 
