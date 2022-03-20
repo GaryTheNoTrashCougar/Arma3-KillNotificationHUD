@@ -52,7 +52,22 @@ KC_HealthStyle = "HealthIcon"; // Select Style - HealthIcon or HealthBar
 KC_showFAK = false; // Boolean - true = enabled, false = disabled
 
 // First Aid Kit (Class Name)
-KC_classFAK = "FirstAidKit"; // Enter class name of the FAKs to be counted
+KC_classFAK1 = "FirstAidKit"; // Enter class name of the FAKs to be counted
+
+// First Aid Kit (Additional Class Name)
+KC_classFAK2 = ""; // Must be different to other FAK class names
+
+// First Aid Kit (Additional Class Name)
+KC_classFAK3 = ""; // Must be different to other FAK class names
+
+// Health Regeneration
+KC_HealthRegen = false; // Boolean - true = enabled, false = disabled
+
+// Full First Aid Kit Healing
+KC_HealthFAK = false; // Boolean - true = enabled, false = disabled
+
+// Full Healing First Aid Kit Removal (Class Name)
+KC_FAK = "FirstAidKit"; // Enter class name of the FAK to be removed when healing
 
 // Compass HUD Display
 KC_CompDisp = false; // Boolean - true = enabled, false = disabled
