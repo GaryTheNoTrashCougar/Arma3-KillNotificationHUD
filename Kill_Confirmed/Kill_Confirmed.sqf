@@ -49,6 +49,10 @@ then
 
 if (KC_HealthStatus) then {[] execVM "Kill_Confirmed\Health_Status\Health_Status.sqf";};
 
+if (KC_HealthRegen) then {[] execVM "Kill_Confirmed\Health_Status\Health_Regen.sqf";};
+
+if (KC_HealthFAK) then {[] execVM "Kill_Confirmed\Health_Status\Health_FAK.sqf";};
+
 if (KC_CompDisp) then {[] execVM "Kill_Confirmed\Compass_Display\Compass_Display.sqf";};
 
 if (KC_HitMarkerStyle isEqualTo 1)
