@@ -1,6 +1,7 @@
 if (!local player) exitWith {};
 
 healthArr = [];
+regenTime = 0;
 
 startRegen =
 {
@@ -13,8 +14,19 @@ startRegen =
 		if ((playerHealth isEqualTo 100) || ((healthArr select 0) < (healthArr select 1)))
 		then
 		{
+			regenTime = 0;
 			terminate regen;
 		};
+	};
+};
+
+regenTimer =
+{
+	while {alive player} 
+	do
+	{
+		regenTime = regenTime + 1;
+		sleep 1;
 	};
 };
 
@@ -30,18 +42,21 @@ then
 		if ((healthArr select 0) < (healthArr select 1))
 		then
 		{
-			[15, false] call BIS_fnc_countdown;
+			terminate timeUntilRegen;
+			regenTime = 0;
+			timeUntilRegen = [] spawn regenTimer;
 		};
 		if ((healthArr select 0) isEqualTo (healthArr select 1) && {playerHealth < 100})
 		then
 		{
-			if (([0] call BIS_fnc_countdown) <= 0)
+			if (regenTime >= 15)
 			then
 			{
 				regen = [] spawn startRegen;
+				terminate timeUntilRegen;
 			};
 		};
 		
 		sleep 1;
 	};
- };
+};
