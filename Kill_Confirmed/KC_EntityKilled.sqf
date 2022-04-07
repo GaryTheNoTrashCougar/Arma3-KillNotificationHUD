@@ -8,7 +8,6 @@ addMissionEventHandler ["EntityKilled",
 	KC_nameKilled = name _killed;
 	KC_isFriendly = [(side group _killer),(side group _killed)] call BIS_fnc_sideIsFriendly;
 	private _distance = _killer distance _killed;
-	private _minDistance = 100;
 	private _cqbDistance = 2;
 	private _assisters = (_killed getVariable ["shooterIndex",[]]) - [_instigator, objNull];
 	_assisters = if (_assisters isEqualTo []) then [{""},{format ["assisters: %1", _assisters apply {name _x}] }];
@@ -69,7 +68,7 @@ addMissionEventHandler ["EntityKilled",
 						{
 							KC_killType = "PAYBACK";
 							KC_lastKiller = [""];
-							if (_distance >= _minDistance)
+							if (_distance >= KC_longshotDist)
 							then
 							{
 								KC_ratingScore = 250;
@@ -89,7 +88,7 @@ addMissionEventHandler ["EntityKilled",
 								}
 								else
 								{
-									if ((_distance > _cqbDistance && {_distance < _minDistance}))
+									if ((_distance > _cqbDistance && {_distance < KC_longshotDist}))
 									then
 									{
 										KC_ratingScore = 200;
@@ -103,7 +102,7 @@ addMissionEventHandler ["EntityKilled",
 						else
 						{
 							KC_killType = "HEADSHOT";
-							if (_distance >= _minDistance)
+							if (_distance >= KC_longshotDist)
 							then
 							{
 								KC_ratingScore = 200;
@@ -123,7 +122,7 @@ addMissionEventHandler ["EntityKilled",
 								}
 								else
 								{
-									if ((_distance > _cqbDistance && {_distance < _minDistance}))
+									if ((_distance > _cqbDistance && {_distance < KC_longshotDist}))
 									then
 									{
 										KC_ratingScore = 150;
@@ -149,7 +148,7 @@ addMissionEventHandler ["EntityKilled",
 								{
 									KC_killType = "PAYBACK";
 									KC_lastKiller = [""];
-									if (_distance >= _minDistance)
+									if (_distance >= KC_longshotDist)
 									then
 									{
 										KC_ratingScore = 200;
@@ -169,7 +168,7 @@ addMissionEventHandler ["EntityKilled",
 										}
 										else
 										{
-											if ((_distance > _cqbDistance && {_distance < _minDistance}))
+											if ((_distance > _cqbDistance && {_distance < KC_longshotDist}))
 											then
 											{
 												KC_ratingScore = 150;
@@ -182,7 +181,7 @@ addMissionEventHandler ["EntityKilled",
 								}
 								else
 								{
-									if (_distance >= _minDistance)
+									if (_distance >= KC_longshotDist)
 									then
 									{
 										KC_killType = "LONG RANGE KILL";
@@ -204,7 +203,7 @@ addMissionEventHandler ["EntityKilled",
 										}
 										else
 										{
-											if ((_distance > _cqbDistance && {_distance < _minDistance}))
+											if ((_distance > _cqbDistance && {_distance < KC_longshotDist}))
 											then
 											{
 												KC_killType = "ENEMY KILLED";
@@ -227,7 +226,7 @@ addMissionEventHandler ["EntityKilled",
 									{
 										KC_killType = "PAYBACK";
 										KC_lastKiller = [""];
-										if (_distance >= _minDistance)
+										if (_distance >= KC_longshotDist)
 										then
 										{
 											KC_ratingScore = 200;
@@ -247,7 +246,7 @@ addMissionEventHandler ["EntityKilled",
 											}
 											else
 											{
-												if ((_distance > _cqbDistance && {_distance < _minDistance}))
+												if ((_distance > _cqbDistance && {_distance < KC_longshotDist}))
 												then
 												{
 													KC_ratingScore = 150;
@@ -261,7 +260,7 @@ addMissionEventHandler ["EntityKilled",
 									else
 									{
 										KC_killType = "EXPLOSIVE KILL";
-										if (_distance >= _minDistance)
+										if (_distance >= KC_longshotDist)
 										then
 										{
 											KC_ratingScore = 150;
@@ -281,7 +280,7 @@ addMissionEventHandler ["EntityKilled",
 											}
 											else
 											{
-												if ((_distance > _cqbDistance && {_distance < _minDistance}))
+												if ((_distance > _cqbDistance && {_distance < KC_longshotDist}))
 												then
 												{
 													KC_ratingScore = 100;
