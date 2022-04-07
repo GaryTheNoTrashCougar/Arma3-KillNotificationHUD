@@ -22,7 +22,7 @@ KC_posX = 0.62; // Numerical value (range at recommended size* 0.7 - 1) - 0.7 = 
 KC_posY = 0.51; // Numerical value (range at recommended size* 0 - 0.94) - 0 = Top, 0.94 = Bottom  *based on 2560x1440 resolution with interface size set to small
 
 // Longshot Distance
-KC_longshot Dist = 100; // Distance in metres for LONGSHOT notification
+KC_longshotDist = 100; // Distance in metres for LONGSHOT notification
 
 // Hit Markers
 KC_HitMarkers = false; // Boolean - true = enabled, false = disabled
