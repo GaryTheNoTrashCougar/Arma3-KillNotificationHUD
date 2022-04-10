@@ -364,10 +364,10 @@ addMissionEventHandler ["EntityKilled",
 	if !((driver (vehicle player)) isEqualTo _killer)
 	then
 	{
-		if (name player in _assisters)
+		if (name player in _assisters && {_killed isNotEqualTo player})
 		then
 		{
-			if !(KC_isFriendly)
+			if ((side group _killed) isNotEqualTo (side group player))
 			then
 			{
 				KC_killType = "ASSIST";
