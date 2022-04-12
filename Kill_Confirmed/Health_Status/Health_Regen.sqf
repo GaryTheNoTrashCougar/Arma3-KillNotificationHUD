@@ -10,6 +10,7 @@ startRegen =
 	{
 		playerHealth = round ((1 - (damage player)) * 100);
 		player setDamage (damage player) - 0.01;
+		player setHitPointDamage ["hitLegs",0];
 		sleep 1;
 		if ((playerHealth isEqualTo 100) || ((healthArr select 0) < (healthArr select 1)))
 		then
