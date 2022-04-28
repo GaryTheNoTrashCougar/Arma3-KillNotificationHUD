@@ -1,7 +1,7 @@
 waitUntil {!(isNull (findDisplay 46))};
 disableSerialization;
 
-[] spawn
+KC_HealthHUD =
 {
 	_uid = getPlayerUID player;
 	
@@ -80,3 +80,16 @@ disableSerialization;
 		};
 	};
 };
+
+[] spawn
+{
+	waitUntil {!isNil "BIS_fnc_init"};
+	
+	while {true} do
+	{
+		_hud = [] spawn KC_HealthHUD;
+		waitUntil {sleep 1; scriptDone _hud};
+	};
+
+};
+true
