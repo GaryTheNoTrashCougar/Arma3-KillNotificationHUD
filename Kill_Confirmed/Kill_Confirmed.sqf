@@ -58,30 +58,30 @@ if (KC_CompDisp) then {[] execVM "Kill_Confirmed\Compass_Display\Compass_Display
 if (KC_HitMarkerStyle isEqualTo 1)
 then
 {
-	KC_KillMarker = {cutRsc ["KC_KillMarker1", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker2", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker3", "PLAIN"];};
-	KC_HitSelection = {cutRsc ["KC_HitMarker1", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker2", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker3", "PLAIN"];};
+	KC_KillMarker = {cutRsc ["KC_KillMarker1", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker2", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker3", "PLAIN"];};
+	KC_HitSelection = {cutRsc ["KC_HitMarker1", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker2", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker3", "PLAIN"];};
 };
 if (KC_HitMarkerStyle isEqualTo 2)
 then
 {
-	KC_KillMarker = {cutRsc ["KC_KillMarker4", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker5", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker6", "PLAIN"];};
-	KC_HitSelection = {cutRsc ["KC_HitMarker4", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker5", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker6", "PLAIN"];};
+	KC_KillMarker = {cutRsc ["KC_KillMarker4", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker5", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker6", "PLAIN"];};
+	KC_HitSelection = {cutRsc ["KC_HitMarker4", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker5", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker6", "PLAIN"];};
 };
 if (KC_HitMarkerStyle isEqualTo 3)
 then
 {
-	KC_KillMarker = {cutRsc ["KC_KillMarker7", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker8", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker9", "PLAIN"];};
-	KC_HitSelection = {cutRsc ["KC_HitMarker7", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker8", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker9", "PLAIN"];};
+	KC_KillMarker = {cutRsc ["KC_KillMarker7", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker8", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker9", "PLAIN"];};
+	KC_HitSelection = {cutRsc ["KC_HitMarker7", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker8", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker9", "PLAIN"];};
 };
 if (KC_HitMarkerStyle isEqualTo 4)
 then
 {
-	KC_KillMarker = {cutRsc ["KC_KillMarker10", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker11", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker12", "PLAIN"];};
-	KC_HitSelection = {cutRsc ["KC_HitMarker10", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker11", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker12", "PLAIN"];};
+	KC_KillMarker = {cutRsc ["KC_KillMarker10", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker11", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker12", "PLAIN"];};
+	KC_HitSelection = {cutRsc ["KC_HitMarker10", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker11", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker12", "PLAIN"];};
 };
 if (KC_HitMarkerStyle isEqualTo 5)
 then
 {
-	KC_KillMarker = {cutRsc ["KC_KillMarker13", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker14", "PLAIN"]; sleep 0.05; cutRsc ["KC_KillMarker15", "PLAIN"];};
-	KC_HitSelection = {cutRsc ["KC_HitMarker13", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker14", "PLAIN"]; sleep 0.05; cutRsc ["KC_HitMarker15", "PLAIN"];};
+	KC_KillMarker = {cutRsc ["KC_KillMarker13", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker14", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker15", "PLAIN"];};
+	KC_HitSelection = {cutRsc ["KC_HitMarker13", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker14", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker15", "PLAIN"];};
 };
