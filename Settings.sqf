@@ -45,6 +45,9 @@ KC_showScore = false; // Boolean - true = enabled, false = disabled
 // Kill Feed
 KC_KillFeed = false; // Boolean - true = enabled, false = disabled
 
+// Kill Feed Style
+KC_FeedStyle = 1; // Select Style - 1 = Name Feed, 2 = Side Feed
+
 // Player Health Status HUD
 KC_HealthStatus = false; // Boolean - true = enabled, false = disabled
 
