@@ -391,20 +391,47 @@ addMissionEventHandler ["EntityKilled",
 	if (KC_KillFeed)
 	then
 	{
-		if (_killed isKindOf "CAManBase") then
+		if (KC_FeedStyle isEqualTo 1)
+		then
 		{
-			if (isNull _instigator) then
+			if (_killed isKindOf "CAManBase")
+			then
 			{
-				_instigator = UAVControl vehicle _killer select 0;
+				if (isNull _instigator)
+				then
+				{
+					_instigator = UAVControl vehicle _killer select 0;
+				};
+				if (isNull _instigator)
+				then
+				{
+					_instigator = _killer;
+				};
+				_distance = _killed distance _instigator;
+				_killFeedStatement = format ["%1 killed %2 (%3m)", name _instigator, name _killed, round _distance];
+				[_killFeedStatement] remoteExec ["systemChat", 0];
 			};
-			if (isNull _instigator) then
+		};
+		if (KC_FeedStyle isEqualTo 2)
+		then
+		{
+			if (_killed isKindOf "CAManBase")
+			then
 			{
-				_instigator = _killer;
+				if (isNull _instigator)
+				then
+				{
+					_instigator = UAVControl vehicle _killer select 0;
+				};
+				if (isNull _instigator)
+				then
+				{
+					_instigator = _killer;
+				};
+				_distance = _killed distance _instigator;
+				_killFeedStatement = format ["%1 killed %2 (%3m)", name _instigator, name _killed, round _distance];
+				[_instigator, _killFeedStatement] remoteExec ["globalChat", 0];
 			};
-			_distance = _killed distance _instigator;
-			_killFeedStatement = format ["%1 killed %2 (%3m)", name _instigator, name _killed, round _distance];
-			[_instigator, _killFeedStatement] remoteExec ["globalChat", 0];
-			
 		};
 	};
 	if (KC_showScore)
