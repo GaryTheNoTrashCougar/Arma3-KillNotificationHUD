@@ -85,3 +85,10 @@ then
 	KC_KillMarker = {cutRsc ["KC_KillMarker13", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker14", "PLAIN"]; sleep 0.03; cutRsc ["KC_KillMarker15", "PLAIN"];};
 	KC_HitSelection = {cutRsc ["KC_HitMarker13", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker14", "PLAIN"]; sleep 0.03; cutRsc ["KC_HitMarker15", "PLAIN"];};
 };
+
+addMissionEventHandler ["Loaded",
+{
+	if (KC_HealthStatus) then {[] execVM "Kill_Confirmed\Health_Status\Health_Status.sqf";};
+	
+	if (KC_CompDisp) then {[] execVM "Kill_Confirmed\Compass_Display\Compass_Display.sqf";};
+}];
