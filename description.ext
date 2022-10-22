@@ -59,19 +59,19 @@ class CfgSounds
 	};
 	class KC_HitHeadSound1
 	{
-		name = "KC_HitSound1";
+		name = "KC_HitHeadSound1";
 		sound[] = {"Kill_Confirmed\Hit_Markers\sound\KC_HitHeadSound1.ogg", db+2, 1,100};
 		titles[] = {};
 	};
 	class KC_HitHeadSound2
 	{
-		name = "KC_HitSound2";
+		name = "KC_HitHeadSound2";
 		sound[] = {"Kill_Confirmed\Hit_Markers\sound\KC_HitHeadSound2.ogg", db+2, 1,100};
 		titles[] = {};
 	};
 	class KC_HitHeadSound3
 	{
-		name = "KC_HitSound3";
+		name = "KC_HitHeadSound3";
 		sound[] = {"Kill_Confirmed\Hit_Markers\sound\KC_HitHeadSound3.ogg", db+2, 1,100};
 		titles[] = {};
 	};
